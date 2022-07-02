@@ -1,0 +1,76 @@
+<form [formGroup]="jobClassificationFG" *ngIf="this.JobClassificationForm">
+    <nb-card>
+      <nb-card-header>
+        Job Classification
+      </nb-card-header>   
+    </nb-card>
+    <nb-card>
+        <nb-card-body>
+          {{jobClassDetail | json}}
+          <div style="padding-bottom: 5px;">
+            <button (click)="createJobClassification(null,true);" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="person-add-outline"></nb-icon>&nbsp;&nbsp;Add Job Classification</button>
+          </div>
+            <table>
+              <tr>
+                <th style="padding-right: 135px;">Action</th>
+                <th style="padding-right: 20px;">Occupational Service Code</th>  
+                <th style="padding-right: 20px;">Service Description</th> 
+                <th style="padding-right: 53px;">Occupational Group Code</th>   
+                <th style="padding-right: 53px;">Group Description</th>   
+                <th style="padding-right: 230px;">Class Code</th>   
+                <th style="padding-right: 230px;">Class Description</th>  
+                <th style="padding-right: 30px;">Salary Grade</th>  
+              </tr>
+            <tr *ngFor="let classification of jobClassificationFormArray.controls;let i = index;let last = last;" [formGroup]="classificationList">
+              <td>
+                <button (click)="editTableRecord('classification',i);" *ngIf="selectedJobClassificationRecord != i" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="edit-2-outline"></nb-icon>Edit</button>
+                <button (click)="saveTableRecord('classification');" *ngIf="selectedJobClassificationRecord == i" mat-raised-button style="background-color: #00d68f; color:white;"><nb-icon icon="save-outline"></nb-icon>Save</button>
+                &nbsp;<button mat-raised-button style="background-color:#ff3d71; color:white;"><nb-icon icon="trash-outline"></nb-icon>Delete</button>
+              </td>
+              <td>
+                <mat-form-field style="width: 215px;" *ngIf="selectedJobClassificationRecord == i">
+                  <input formControlName="occupationalServCode" placeholder="Enter Service Code"  matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedJobClassificationRecord != i">{{classification.value.occupationalServCode}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 210px;" *ngIf="selectedJobClassificationRecord == i">
+                  <input formControlName="occupationalDesc" placeholder="Enter Description"  matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedJobClassificationRecord != i">{{classification.value.occupationalDesc}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 110px;" *ngIf="selectedJobClassificationRecord == i">
+                  <input formControlName="occupationalGrpCode" placeholder="Enter Group Code"  matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedJobClassificationRecord != i">{{classification.value.occupationalGrpCode}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 265px;" *ngIf="selectedJobClassificationRecord == i">
+                  <input formControlName="occupationalGrpDesc" placeholder="Enter Description"  matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedJobClassificationRecord != i">{{classification.value.occupationalGrpDesc}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 265px;" *ngIf="selectedJobClassificationRecord == i">
+                  <input formControlName="classCode" placeholder="Enter Class Code"  matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedJobClassificationRecord != i">{{classification.value.classCode}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 265px;" *ngIf="selectedJobClassificationRecord == i">
+                  <input formControlName="classDesc" placeholder="Enter Class Code"  matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedJobClassificationRecord != i">{{classification.value.classDesc}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 265px;" *ngIf="selectedJobClassificationRecord == i">
+                  <input formControlName="salary_grade" placeholder="Enter Class Code"  matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedJobClassificationRecord != i">{{classification.value.salary_grade}}</span>
+              </td>
+            </tr> 
+            </table>
+        </nb-card-body>
+    </nb-card>
+</form>

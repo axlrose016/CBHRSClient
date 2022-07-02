@@ -1,0 +1,33 @@
+<axl-app-list  (applistbtnclick)='eventHandler($event)'></axl-app-list>
+<div class="container">
+    <nb-card>
+        <nb-card-header>
+            Request Types
+        </nb-card-header>
+        <nb-card>
+            <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+        </nb-card>
+        <nb-card-body>
+            <table mat-table #table class="mat-elevation-z8" [dataSource]="gridDataSource" matSort>
+                <!-- Leave ID Column -->
+                <ng-container matColumnDef="requestTypeId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Request Type ID </th>
+                <td mat-cell *matCellDef="let erow" > {{erow.requestTypeId}} </td>
+                </ng-container>  
+                <!-- Employee Code Column -->
+                <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Description </th>
+                <td mat-cell *matCellDef="let erow" > {{erow.description}} </td>
+                </ng-container>
+                <!-- Leave Type Column -->
+                <ng-container matColumnDef="is_active">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Active </th>
+                <td mat-cell *matCellDef="let erow">{{erow.is_active}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onUserRowSelect(row.requestTypeId)"></tr>
+            </table>  
+            <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+        </nb-card-body>
+    </nb-card>
+</div>

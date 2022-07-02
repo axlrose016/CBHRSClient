@@ -1,0 +1,91 @@
+<axl-app-list  (applistbtnclick)='eventHandler($event)'></axl-app-list>
+<div class="container">
+  <nb-card>
+    <nb-card-header>
+      Job Requisitions
+    </nb-card-header>
+    <mat-tab-group>
+      <mat-tab label="List">
+      <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+        <nb-card>
+          <nb-card-body>
+            <table mat-table #table class="mat-elevation-z8" [dataSource]="gridDataSource" matSort>
+                <ng-container matColumnDef="requisitionId">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Requisition ID </th>
+                    <td mat-cell *matCellDef="let erow" > {{erow.requisitionId}} </td>
+                </ng-container>  
+                <ng-container matColumnDef="requestDate">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Request Date </th>
+                  <td mat-cell *matCellDef="let erow" > {{erow.requestDate}} </td>
+                </ng-container>  
+                <ng-container matColumnDef="locationAddress">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Location </th>
+                  <td mat-cell *matCellDef="let erow" > {{erow.locationAddress}} </td>
+                </ng-container>  
+                <ng-container matColumnDef="jobTitle">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Job Title </th>
+                    <td mat-cell *matCellDef="let erow" > {{erow.jobTitle}} </td>
+                </ng-container>  
+                <ng-container matColumnDef="salary">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Salary </th>
+                  <td mat-cell *matCellDef="let erow" > {{erow.salary}} </td>
+                </ng-container>  
+                <ng-container matColumnDef="jobDescription">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 400px;"> Job Description </th>
+                    <td mat-cell *matCellDef="let erow" > {{erow.jobDescription}} </td>
+                </ng-container>  
+                <ng-container matColumnDef="qualification">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 400px;"> Qualification </th>
+                  <td mat-cell *matCellDef="let erow" > {{erow.qualification}} </td>
+                </ng-container>  
+                <ng-container matColumnDef="isOpen">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 80px;"> Open </th>
+                    <td mat-cell *matCellDef="let erow" > {{erow.isOpen}} </td>
+                </ng-container>  
+                <ng-container matColumnDef="isApproved">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 80px;"> Approved </th>
+                  <td mat-cell *matCellDef="let erow" > {{erow.isApproved}} </td>
+                </ng-container>  
+                <ng-container matColumnDef="closingDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Closing Date </th>
+                    <td mat-cell *matCellDef="let erow" > {{erow.closingDate}} </td>
+                </ng-container> 
+                <ng-container matColumnDef="request_type_desc">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Request Type </th>
+                  <td mat-cell *matCellDef="let erow" > {{erow.request_type_desc}} </td>
+              </ng-container> 
+              <ng-container matColumnDef="department_desc">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Department </th>
+                <td mat-cell *matCellDef="let erow" > {{erow.department_desc}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="job_category_desc">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Job Category </th>
+              <td mat-cell *matCellDef="let erow" > {{erow.job_category_desc}} </td>
+          </ng-container> 
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onUserRowSelect(row.requisitionId)"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+          </nb-card-body>
+        </nb-card>
+      </mat-tab>
+      <mat-tab label="Reports">
+        <nb-card>
+          <nb-card-header>Master List</nb-card-header>
+          <nb-card-body>
+              <div class="row">
+                  <div class="col-sx">
+                      <a class="button button1" (click)="exportTableList()">Export   <i class="far fa-file-excel"></i></a>
+                  </div>
+                  <div class="col-lg">
+                      <span><p>Report Details: Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                      </p></span> 
+                  </div>
+              </div>
+          </nb-card-body>
+        </nb-card>
+      </mat-tab>
+    </mat-tab-group>
+  </nb-card>
+</div>

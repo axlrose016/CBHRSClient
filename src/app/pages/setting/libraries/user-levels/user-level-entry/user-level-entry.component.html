@@ -1,0 +1,27 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+    <form [formGroup]="UserLevelForm" *ngIf="this.UserLevelForm">
+        <nb-card>
+            <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+            <nb-card-header>
+              User Level Form
+            </nb-card-header>
+        </nb-card>
+        <nb-card>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <input formControlName="description" type="text" nbInput fullWidth placeholder="Description">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <nb-checkbox style="float: right;" status="basic" formControlName="is_active">Active</nb-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </form>
+</div>

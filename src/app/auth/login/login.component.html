@@ -1,0 +1,69 @@
+<nb-layout>
+    <nb-layout-column>
+        <div class="bg">
+            <div class="header col-sm-4">
+            </div>
+            <div id="a1" class="col-sm-4">
+            </div>
+            <div id="a2" class="col-sm-4">
+                <div class="title">
+                    <b>C</b>loud-based <b> HR </b> <b>S</b>ystem 
+                </div>
+                <div [hidden]="!hideRegister">
+                    <form [formGroup]="signInForm"  (ngSubmit)="signIn()">
+                        <mat-form-field  appearance="outline" class="mat-fullWidth">
+                            <mat-label>User name</mat-label>
+                            <input formControlName="Username" matInput type="text" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="mat-fullWidth">
+                            <mat-label>Password</mat-label>
+                            <input formControlName="Password" matInput [type]="hide ? 'password' : 'text'">
+                            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <div id="a3">
+                            <a href=""><small class="mat-fullWidth">forgot password?</small></a> 
+                        </div>
+                        <button mat-raised-button color="primary" id="a4" class="mat-fullWidth">Login</button>
+                    </form>
+                    <button mat-raised-button color="primary" id="a4" class="mat-fullWidth" (click)="showRegisterForm()">Register</button>
+                </div>
+                <div [hidden]="hideRegister">
+                    <form [formGroup]="registerForm" (ngSubmit)="register()">
+                        <mat-form-field  appearance="outline" class="mat-fullWidth">
+                            <mat-label>User name</mat-label>
+                            <input formControlName="userName" matInput type="text" />
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="mat-fullWidth">
+                            <mat-label>Password</mat-label>
+                            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                            <mat-error *ngIf="registerForm.hasError('required', '_password')">
+                                Please enter your new password
+                            </mat-error>
+                            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="mat-fullWidth">
+                            <mat-label>Confirm Password</mat-label>
+                            <input formControlName="confirmPassword" matInput [type]="hide ? 'password' : 'text'" [errorStateMatcher]="matcher">
+                            <mat-error *ngIf="registerForm.hasError('notSame')">
+                                Passwords do not match
+                            </mat-error>  
+                            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <div id="a3">
+                            <a id="a_link" (click)="showRegisterForm()"><small class="mat-fullWidth">Already have an account?</small></a> 
+                        </div>
+                        <button mat-raised-button color="primary" id="a4" class="mat-fullWidth">Submit</button>
+                    </form>
+                </div>
+                <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+                <span style="color:red;"><i>{{error$ | async}}</i></span>
+            </div>
+        </div>
+    </nb-layout-column>
+</nb-layout>

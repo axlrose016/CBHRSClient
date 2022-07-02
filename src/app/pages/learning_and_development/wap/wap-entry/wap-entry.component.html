@@ -1,0 +1,383 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+    <form [formGroup]="WapForm" *ngIf="this.WapForm">
+        <nb-card>
+            <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+            <nb-card-header>
+                Work Application Plan Form
+                <button (click)="openParticipantDialog();" nbButton status="success" style="float: right;"><nb-icon icon="search-outline"></nb-icon>Search Participant’s</button>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row" formGroupName="personDetails">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Person Profile ID</mat-label>
+                                <input formControlName="personId" matInput placeholder="..." matInput placeholder="Placeholder">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>First Name</mat-label>
+                                <input formControlName="firstName" matInput placeholder="..." matInput placeholder="Placeholder">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Middle Name</mat-label>
+                                <input formControlName="middleName" matInput placeholder="..." matInput placeholder="Placeholder">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Last Name</mat-label>
+                                <input formControlName="lastName" matInput placeholder="..." matInput placeholder="Placeholder">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Birth Date</mat-label>
+                                <input formControlName="birthDate" matInput [matDatepicker]="pickerBdate">
+                                <mat-datepicker-toggle matSuffix [for]="pickerBdate"></mat-datepicker-toggle>
+                                <mat-datepicker #pickerBdate></mat-datepicker>
+                              </mat-form-field>
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Place Of Birth</mat-label>
+                                <input formControlName="placeOfBirth" matInput placeholder="..." matInput placeholder="Placeholder">
+                            </mat-form-field> 
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Blood Type</mat-label>
+                                <input formControlName="bloodType" matInput placeholder="..." matInput placeholder="Placeholder">
+                            </mat-form-field> 
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Mobile Number</mat-label>
+                                <input formControlName="mobileNo" matInput placeholder="..." matInput placeholder="Placeholder">
+                            </mat-form-field> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Encode the Title of the seminar/conference/workshop/course attended</mat-label>
+                                <textarea formControlName="title" matInput placeholder="..."></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Date Conducted</mat-label>
+                                <input formControlName="dateConduct" matInput [matDatepicker]="picker1">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Encode Provider or the name of the entity which conducted the seminar/conference/workshop/course</mat-label>
+                                <textarea formControlName="provider" matInput placeholder="..."></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Encode the learning outcomes which are those enumerated in the Learning Design of the seminar/conference/workshop/course</mat-label>
+                                <textarea formControlName="learningOutcome" matInput placeholder="..."></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <b>Check the checkbox you choose for the intervention or application plan that aligned to your goal.</b>
+                            <!-- <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Select for the intervention or application plan that aligned to your goal.</mat-label>
+                                <select formControlName="officeId" matNativeControl required>
+                                    <option [ngValue]=1>Office/Division/Individual Performance Commitment and Review (O/D/IPCR)</option>
+                                    <option [ngValue]=2>Work and Financial Plan</option>
+                                    <option [ngValue]=3>Career/Succession Plan</option>
+                                    <option [ngValue]=4>Contract of Service</option>
+                                    <option [ngValue]=5>Individual Development Plan (IDP) or Performance Improvement Plan (PIP)</option>
+                                    <option [ngValue]=6>Others, please specify</option>
+                                </select>
+                              </mat-form-field> -->
+                              <!-- <div *ngFor="let intervention of interventions; let i = index" >
+                                <mat-checkbox class="example-margin" 
+                                (change)="onChange($event)" [value]="intervention.interventionId">{{intervention.description}}</mat-checkbox>
+                            </div> -->
+                            <section>
+                                <mat-checkbox formControlName="has_intervention_ipcr" class="example-margin">Office/Division/Individual Performance Commitment and Review (O/D/IPCR)</mat-checkbox><br>
+                                <mat-checkbox formControlName="has_intervention_wfp" class="example-margin">Work and Financial Plan</mat-checkbox><br>
+                                <mat-checkbox formControlName="has_intervention_csp" class="example-margin">Career/Succession Plan</mat-checkbox><br>
+                                <mat-checkbox formControlName="has_intervention_cos" class="example-margin">Contract of Service</mat-checkbox><br>
+                                <mat-checkbox formControlName="has_intervention_idp" class="example-margin">Individual Development Plan (IDP) or Performance Improvement Plan (PIP)</mat-checkbox><br>
+                                <mat-checkbox formControlName="has_intervention_others" class="example-margin">Others, please specify</mat-checkbox>
+                                <mat-form-field *ngIf="this.WapForm.has_intervention_others == true" class="example-full-width" style="width:100%" appearance="fill">
+                                    <mat-label>Other Intervention</mat-label>
+                                    <textarea formControlName="intervention_others" matInput placeholder="..."></textarea>
+                                </mat-form-field>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Encode Objectives</mat-label>
+                                <textarea formControlName="objectives" matInput placeholder="..."></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Encode the Output/s expected from the participant that prove/s the objective was met</mat-label>
+                                <textarea formControlName="output" matInput placeholder="..."></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Select Milestone %</mat-label>
+                                <select formControlName="milestone" matNativeControl required>
+                                    <option [ngValue]=1>10%</option>
+                                    <option [ngValue]=2>20%</option>
+                                    <option [ngValue]=3>30%</option>
+                                    <option [ngValue]=4>40%</option>
+                                    <option [ngValue]=5>50%</option>
+                                    <option [ngValue]=6>60%</option>
+                                    <option [ngValue]=7>70%</option>
+                                    <option [ngValue]=8>80%</option>
+                                    <option [ngValue]=9>90%</option>
+                                    <option [ngValue]=10>100%</option>
+                                </select>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Encode what are needs to be done</mat-label>
+                                <textarea formControlName="whatNeedsToBeDone" matInput placeholder="..."></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Start Date</mat-label>
+                                <input formControlName="startDate" matInput [matDatepicker]="picker2">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill">
+                                <mat-label>End Date</mat-label>
+                                <input formControlName="endDate" matInput [matDatepicker]="picker3">
+                                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                                <mat-datepicker #picker3></mat-datepicker>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Select target Day/s on the list</mat-label>
+                                <select formControlName="targetDays" matNativeControl required>
+                                    <option [ngValue]=1>1</option>
+                                    <option [ngValue]=2>2</option>
+                                    <option [ngValue]=3>3</option>
+                                    <option [ngValue]=4>4</option>
+                                    <option [ngValue]=5>5</option>
+                                    <option [ngValue]=6>6</option>
+                                    <option [ngValue]=7>7</option>
+                                    <option [ngValue]=8>8</option>
+                                    <option [ngValue]=9>9</option>
+                                    <option [ngValue]=10>10</option>
+                                    <option [ngValue]=11>11</option>
+                                    <option [ngValue]=12>12</option>
+                                    <option [ngValue]=13>13</option>
+                                    <option [ngValue]=14>14</option>
+                                    <option [ngValue]=15>15</option>
+                                </select>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Select means of verification</mat-label>
+                                <select formControlName="mov" matNativeControl required>
+                                    <option [ngValue]=1>Web development</option>
+                                    <option [ngValue]=2>Communication skills</option>
+                                    <option [ngValue]=3>Microsoft office</option>
+                                    <option [ngValue]=4>Timekeeping</option>
+                                    <option [ngValue]=5>Interpreting data</option>
+                                    <option [ngValue]=6>Persuasion</option>
+                                    <option [ngValue]=7>Financial planning</option>
+                                    <option [ngValue]=8>Leadership skills</option>
+                                    <option [ngValue]=9>Copywriting</option>
+                                    <option [ngValue]=10>Motivation</option>
+                                    <option [ngValue]=11>Troubleshooting</option>
+                                    <option [ngValue]=12>Ambition</option>
+                                    <option [ngValue]=13>Project management</option>
+                                    <option [ngValue]=14>Negotiating</option>
+                                    <option [ngValue]=15>Programming skills</option>
+                                    <option [ngValue]=16>Critical thinking</option>
+                                    <option [ngValue]=17>Social Media Marketing</option>
+                                    <option [ngValue]=18>Creative thinking</option>
+                                    <option [ngValue]=19>Bookkeeping</option>
+                                    <option [ngValue]=20>Work ethic</option>
+                                    <option [ngValue]=21>Spoken languages</option>
+                                    <option [ngValue]=22>Collaboration</option>
+                                    <option [ngValue]=23>Adobe Creative Cloud</option>
+                                    <option [ngValue]=24>Active listening</option>
+                                    <option [ngValue]=25>CRM platforms</option>
+                                    <option [ngValue]=26>Positive attitude</option>
+                                    <option [ngValue]=27>Research</option>
+                                    <option [ngValue]=28>Energy</option>
+                                    <option [ngValue]=29>Data engineering</option>
+                                    <option [ngValue]=30>Enthusiasm</option>
+                                    <option [ngValue]=31>Design</option>
+                                    <option [ngValue]=32>Friendliness</option>
+                                    <option [ngValue]=33>Diagnostics</option>
+                                    <option [ngValue]=34>Honesty</option>
+                                    <option [ngValue]=35>Google analytics</option>
+                                    <option [ngValue]=36>Confidence</option>
+                                    <option [ngValue]=37>Sales funnel management</option>
+                                    <option [ngValue]=38>Problem-solving</option>
+                                    <option [ngValue]=39>Coding languages</option>
+                                    <option [ngValue]=40>Adaptability</option>
+                                    <option [ngValue]=41>Construction</option>
+                                    <option [ngValue]=42>Conflict resolution</option>
+                                    <option [ngValue]=43>Content creation</option>
+                                    <option [ngValue]=44>Inspire people</option>
+                                    <option [ngValue]=45>Storytelling</option>
+                                    <option [ngValue]=46>Mentoring</option>
+                                    <option [ngValue]=47>Presentation skills</option>
+                                    <option [ngValue]=48>Empathy</option>
+                                    <option [ngValue]=49>Logistics</option>
+                                    <option [ngValue]=50>Patience</option>
+                                    <option [ngValue]=51>Business development</option>
+                                    <option [ngValue]=52>Cleanliness</option>
+                                    <option [ngValue]=53>Engineering</option>
+                                    <option [ngValue]=54>Cooperation</option>
+                                    <option [ngValue]=55>Market research</option>
+                                    <option [ngValue]=56>Emotional Intelligence</option>
+                                    <option [ngValue]=57>Quality assurance</option>
+                                    <option [ngValue]=58>Influence</option>
+                                    <option [ngValue]=59>Technical writing</option>
+                                    <option [ngValue]=60>Self-awareness</option>
+                                    <option [ngValue]=61>Affiliate marketing</option>
+                                    <option [ngValue]=62>Networking</option>
+                                    <option [ngValue]=63>Editing</option>
+                                    <option [ngValue]=64>Multitasking</option>
+                                    <option [ngValue]=65>Proposal writing</option>
+                                    <option [ngValue]=66>Competitiveness</option>
+                                    <option [ngValue]=67>Video production</option>
+                                    <option [ngValue]=68>Respectfulness</option>
+                                    <option [ngValue]=69>Auditing</option>
+                                    <option [ngValue]=70>Independence</option>
+                                    <option [ngValue]=71>Carpentry</option>
+                                    <option [ngValue]=72>Perseverance</option>
+                                    <option [ngValue]=73>Plumbing</option>
+                                    <option [ngValue]=74>Dependable</option>
+                                    <option [ngValue]=75>Business etiquette</option>
+                                    <option [ngValue]=76>Self-awareness</option>
+                                    <option [ngValue]=77>Forecasting</option>
+                                    <option [ngValue]=78>Wit</option>
+                                    <option [ngValue]=79>Data presentation</option>
+                                    <option [ngValue]=80>Persistence</option>
+                                    <option [ngValue]=81>Prototyping</option>
+                                    <option [ngValue]=82>Trainable</option>
+                                    <option [ngValue]=83>Systems administration</option>
+                                    <option [ngValue]=84>Public speaking</option>
+                                    <option [ngValue]=85>Search Engine Optimization</option>
+                                    <option [ngValue]=86>Understanding body language</option>
+                                    <option [ngValue]=87>Marketing strategy</option>
+                                    <option [ngValue]=88>Flexibility</option>
+                                    <option [ngValue]=89>Facebook marketing</option>
+                                    <option [ngValue]=90>Supervisory skills</option>
+                                    <option [ngValue]=91>Google Ads</option>
+                                    <option [ngValue]=92>Delegation</option>
+                                    <option [ngValue]=93>Lead generation</option>
+                                    <option [ngValue]=94>Courtesy</option>
+                                    <option [ngValue]=95>Online advertising</option>
+                                    <option [ngValue]=96>Showmanship</option>
+                                    <option [ngValue]=97>Conversion optimization</option>
+                                    <option [ngValue]=98>Diversity and disability awareness</option>
+                                    <option [ngValue]=99>Link building</option>
+                                    <option [ngValue]=100>Accountability</option>
+                                    <option [ngValue]=101>DevOps</option>
+                                    <option [ngValue]=102>Self-confidence</option>
+                                    <option [ngValue]=103>User Interface Design</option>
+                                    <option [ngValue]=104>Customer service</option>
+                                    <option [ngValue]=105>Accessibility</option>
+                                    <option [ngValue]=106>Team Management</option>
+                                    <option [ngValue]=107>Others</option>
+                                </select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                For Manager Only
+            </nb-card-header>
+            <nb-card-body>
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <mat-form-field appearance="fill" style="width: 100%;">
+                            <mat-label>Rating</mat-label>
+                            <select formControlName="rating" matNativeControl required>
+                                <option [ngValue]=1>100% =100</option>
+                                <option [ngValue]=2>99%-76% =88</option>
+                                <option [ngValue]=3>75%-51%= 75</option>
+                                <option [ngValue]=4>50%-26%=50</option>
+                                <option [ngValue]=5>25%-1%=25</option>
+                            </select>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <mat-form-field appearance="fill" style="width: 100%;">
+                            <mat-label>Reason for Non-Accomplishment</mat-label>
+                            <select formControlName="reasonForNonAccomplishment" matNativeControl required>
+                                <option [ngValue]=1>Not Applicable</option>
+                                <option [ngValue]=2>Lack of Involvement.</option>
+                                <option [ngValue]=3>Lack of a Written Plan.</option>
+                                <option [ngValue]=4>Lack of Technical Skills.</option>
+                                <option [ngValue]=5>Lack of Communication.</option>
+                                <option [ngValue]=6>Lack of Right Attitude.</option>
+                                <option [ngValue]=7>Lack of Focus.</option>
+                                <option [ngValue]=8>Lack of Motivation.</option>
+                                <option [ngValue]=9>Poor Management</option>
+                                <option [ngValue]=10>Environmental Distractions</option>
+                                <option [ngValue]=11>Multitasking</option>
+                                <option [ngValue]=12>Others</option>
+                            </select>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                            <mat-label>If Others, please specify</mat-label>
+                            <textarea formControlName="otherReason" matInput placeholder="..."></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </form>
+</div>

@@ -1,0 +1,61 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+    <form [formGroup]="LDNAForm" *ngIf="this.LDNAForm">
+        <nb-card>
+            <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+            <nb-card-header>
+              LDNA Form
+            </nb-card-header>
+        </nb-card>
+        <nb-card>
+            <nb-card-body>
+                <nb-select formControlName="departmentId" fullWidth placeholder="Department"  [(selected)]="selectedDepartment">
+                    <nb-option *ngFor="let department of lib_department; let i = index" [value]="department.departmentId">
+                        {{department.description}}
+                    </nb-option>
+                </nb-select>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-body>
+              <div style="padding-bottom: 5px;">
+                <button (click)="openCoreCompetencyDialog();" nbButton status="success"><nb-icon icon="search-outline"></nb-icon>Search Core Competency</button>
+              </div>
+              <table>
+                  <tr>
+                    <th style="padding-right: 50px;">Parent Competency</th>
+                    <th style="padding-right: 135px;">Competency Category</th>
+                    <th style="padding-right: 20px;">Permanent</th>
+                    <th style="padding-right: 20px;">Contractual</th>
+                  </tr>
+                  <tr *ngFor="let category of ldnaResultFormArray.controls;let i = index; let last = last;"[formGroup]="category">
+                      <td>
+                        <nb-select formControlName="coreCompetencyId" fullWidth placeholder="Core Competency"  [(selected)]="selectedCoreCompetency">
+                          <nb-option *ngFor="let coreCompetency of lib_core_competency; let i = index" [value]="coreCompetency.coreCompetencyId">
+                              {{coreCompetency.description}}
+                          </nb-option>
+                        </nb-select>
+                      </td>
+                      <td>
+                        <nb-select formControlName="competencyId" fullWidth placeholder="Competency Category"  [(selected)]="selectedCompetencyCategory">
+                          <nb-option *ngFor="let competencyCategory of lib_competency_category; let i = index" [value]="competencyCategory.competencyId">
+                              {{competencyCategory.description}}
+                          </nb-option>
+                        </nb-select>
+                      </td>
+                      <td>
+                        <mat-form-field style="width: 100px;">
+                            <input type="number" formControlName="permanent" style="text-align: right;" matInput/>
+                        </mat-form-field>
+                      </td>
+                      <td>
+                        <mat-form-field style="width: 100px;">
+                            <input type="number" formControlName="contractual" style="text-align: right;" matInput/>
+                        </mat-form-field>
+                      </td>
+                  </tr>
+              </table>
+            </nb-card-body>
+        </nb-card>
+    </form>
+</div>

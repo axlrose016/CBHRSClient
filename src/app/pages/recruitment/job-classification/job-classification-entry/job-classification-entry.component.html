@@ -1,0 +1,122 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+    <form [formGroup]="JobClassForm" *ngIf="this.JobClassForm">
+        <nb-card>
+            <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+            <nb-card-header>
+                Job Classification Form
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Select Occupational Service</mat-label>
+                                <select formControlName="occupationalServCode" matNativeControl required>
+                                    <option [ngValue]=1>General Administrative Service</option>
+                                    <option [ngValue]=2>Financial Service</option>
+                                    <option [ngValue]=3>Planning Service</option>
+                                    <option [ngValue]=4>Architecture and Engineering Service</option>
+                                    <option [ngValue]=5>Transportation, Communication and Public Utilities Service</option>
+                                    <option [ngValue]=6>Crafts, Trades and Related Service</option>
+                                    <option [ngValue]=7>Social Sciences and Welfare Service</option>
+                                    <option [ngValue]=8>Information, Art and Recreation Service</option>
+                                    <option [ngValue]=9>Medicine and Health Service</option>
+                                    <option [ngValue]=10>Education, Library, Museum and Archival Service</option>
+                                    <option [ngValue]=11>Agrarian, Agricultural and Enviromnental Service</option>
+                                    <option [ngValue]=12>Trade, Tourism and Industry Service</option>
+                                    <option [ngValue]=13>Mathematics, Physical and Biological Sciences Service</option>
+                                    <option [ngValue]=14>Defense and Security Service</option>
+                                    <option [ngValue]=15>Legal and Judicial Service</option>
+                                    <option [ngValue]=16>Foreign Relations Service</option>
+                                    <option [ngValue]=17>Miscellaneous Service</option>
+                                    <option [ngValue]=18>Executive Service</option>
+                                    <option [ngValue]=19>Legislative Service</option>
+                                    <option [ngValue]=20>Corporate Governance</option>
+                                </select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Select Numerical Suffix and/or Mixed Adjectival Used</mat-label>
+                                <select formControlName="numerical_suffix" matNativeControl required>
+                                    <option [ngValue]=1>I</option>
+                                    <option [ngValue]=2>II</option>
+                                    <option [ngValue]=3>III</option>
+                                    <option [ngValue]=4>IV</option>
+                                    <option [ngValue]=5>V</option>
+                                    <option [ngValue]=6>VI</option>
+                                    <option [ngValue]=7>VII</option>
+                                    <option [ngValue]=8>VIII</option>
+                                    <option [ngValue]=9>Junior</option>
+                                    <option [ngValue]=10>Senior</option>
+                                    <option [ngValue]=11>Supervising</option>
+                                    <option [ngValue]=12>Chief</option>
+                                    <option [ngValue]=13>Director</option>
+                                </select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Enter General Duties and Responsibilities of a Class of Position</mat-label>
+                                <textarea formControlName="duties_and_responsibilities" matInput placeholder="..."></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field appearance="fill" style="width: 100%;">
+                                <mat-label>Salary Grade</mat-label>
+                                <select formControlName="salary_grade" matNativeControl required>
+                                    <option [ngValue]=1>1</option>
+                                    <option [ngValue]=2>2</option>
+                                    <option [ngValue]=3>3</option>
+                                    <option [ngValue]=4>4</option>
+                                    <option [ngValue]=5>5</option>
+                                    <option [ngValue]=6>6</option>
+                                    <option [ngValue]=7>7</option>
+                                    <option [ngValue]=8>8</option>
+                                    <option [ngValue]=9>9</option>
+                                    <option [ngValue]=10>10</option>
+                                    <option [ngValue]=11>11</option>
+                                    <option [ngValue]=12>12</option>
+                                    <option [ngValue]=13>13</option>
+                                    <option [ngValue]=14>14</option>
+                                    <option [ngValue]=15>15</option>
+                                    <option [ngValue]=16>16</option>
+                                    <option [ngValue]=17>17</option>
+                                    <option [ngValue]=18>18</option>
+                                    <option [ngValue]=19>19</option>
+                                    <option [ngValue]=20>20</option>
+                                    <option [ngValue]=21>21</option>
+                                    <option [ngValue]=22>22</option>
+                                    <option [ngValue]=23>23</option>
+                                    <option [ngValue]=24>24</option>
+                                    <option [ngValue]=25>25</option>
+                                    <option [ngValue]=26>26</option>
+                                    <option [ngValue]=27>27</option>
+                                    <option [ngValue]=28>28</option>
+                                    <option [ngValue]=29>29</option>
+                                    <option [ngValue]=30>30</option>
+                                    <option [ngValue]=31>31</option>
+                                    <option [ngValue]=32>32</option>
+                                    <option [ngValue]=33>33</option>
+                                </select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div> 
+            </nb-card-body>
+        </nb-card>
+    </form>
+</div>
