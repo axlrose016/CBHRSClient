@@ -1,0 +1,203 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+    <form [formGroup]="ComplaintForm" *ngIf="this.ComplaintForm">
+    <nb-card>
+        <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+        <nb-card-header>
+            Complaint Form
+        </nb-card-header>
+        <nb-card-body>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <mat-form-field appearance="fill" style="width: 100%;">
+                            <mat-label>Select your office</mat-label>
+                            <select formControlName="officeId" matNativeControl required>
+                              <option [ngValue]=1>Administration and Financial Management Team (AFMT)</option>  
+                              <option [ngValue]=2>Field Implementation and Coordination Team ( NCR and Luzon)</option> 
+                              <option [ngValue]=3>Health Policy and Systems Development Team</option> 
+                              <option [ngValue]=4>Procurement and Supply Chain Management Team</option> 
+                              <option [ngValue]=5>Health Regulation Team</option> 
+                              <option [ngValue]=6>Health Facilities and Infrastructure Development Team</option> 
+                              <option [ngValue]=7>Field Implementation and Coordination Team (Visayas and Mindanao)</option> 
+                              <option [ngValue]=8>Field Implementation and Coordination Team ( NCR and North Luzon)</option> 
+                              <option [ngValue]=9>Health Emergency Management Bureau</option> 
+                              <option [ngValue]=10>Internal Audit Service</option> 
+                              <option [ngValue]=11>Legal Service (LS)</option> 
+                              <option [ngValue]=12>Bureau of International Health Cooperation (BIHC)</option> 
+                              <option [ngValue]=13>Bureau of Local Health Systems Development</option> 
+                              <option [ngValue]=14>Health Policy Development and Planning Bureau (HPDPB)</option> 
+                              <option [ngValue]=15>Health Human Resource Development Bureau (HHRDB)</option> 
+                              <option [ngValue]=16>Disease Prevention and Control Bureau (DPCB)</option> 
+                              <option [ngValue]=17>Health Promotion Bureau</option> 
+                              <option [ngValue]=18>Epidemiology Bureau</option> 
+                              <option [ngValue]=19>Health Facilities Enhancement Program Management Office</option> 
+                              <option [ngValue]=20>Health Facility Development Bureau</option> 
+                              <option [ngValue]=21>Knowledge Management and Information Technology Service</option> 
+                              <option [ngValue]=21>Bureau of Quarantine</option> 
+                              <option [ngValue]=22>Supply Chain Management Service</option> 
+                              <option [ngValue]=23>Procurement Service</option> 
+                              <option [ngValue]=24>Financial and Management Service</option> 
+                              <option [ngValue]=25>Administrative Service</option> 
+                              <option [ngValue]=26>Malasakit Program Office</option> 
+                              <option [ngValue]=27>Pharmaceutical Division</option> 
+                              <option [ngValue]=28>Health Facilities and Services Regulatory Bureau (HFSRB)</option> 
+                              <option [ngValue]=29>Bureau of Quarantine (BOQ)</option> 
+                            </select>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <nb-card>
+                        <nb-card-header>
+                            Complainant Information
+                            <button (click)="openParticipantDialog();" nbButton status="success" style="float: right;"><nb-icon icon="search-outline"></nb-icon>Search Complainant</button>
+                        </nb-card-header>
+                        <nb-card-body>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <input formControlName="complaintName" type="text" nbInput fullWidth placeholder="Full Name">
+                                    </div>
+                                </div>
+                            </div>  
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <mat-form-field appearance="fill" style="width: 100%;">
+                            <mat-label>Select your office</mat-label>
+                            <select formControlName="typeOfComplaint" matNativeControl required>
+                                <option [ngValue]=1>Lack of Communication</option>
+                                <option [ngValue]=2>Ambiguously-Defined Employee Roles</option>
+                                <option [ngValue]=3>Bosses Playing Favorites</option>
+                                <option [ngValue]=4>Bullying and Hostile Work Environments</option>
+                                <option [ngValue]=5>Not Having Time for Employees</option>
+                                <option [ngValue]=6>Employees complaining About the Supervisor: Taking Credit for Other’s Ideas</option>
+                                <option [ngValue]=7>Work/Life Balance Concerns</option>
+                                <option [ngValue]=8>Unrealistic expectations regarding work</option>
+                                <option [ngValue]=9>Cultivating Any Type of Hostile Work Environment</option>
+                                <option [ngValue]=10>Micromanagement</option>
+                                <option [ngValue]=11>No Opportunity for Advancement</option>
+                                <option [ngValue]=12>Excessive demands that are impossible to meet</option>
+                                <option [ngValue]=13>Demeaning demands far below the employee’s capability</option>
+                                <option [ngValue]=14>Intrusion into the employee’s personal life</option>
+                                <option [ngValue]=15>Interpersonal Challenges</option>
+                                <option [ngValue]=16>Physical assaults of a sexual nature</option>
+                                <option [ngValue]=17>Unwelcome sexual advances, propositions, or other sexual comments</option>
+                                <option [ngValue]=18>Sharing sexual photos (pornography)</option>
+                                <option [ngValue]=19>Posting sexual posters</option>
+                                <option [ngValue]=20>Sexual comments, jokes, questions</option>
+                                <option [ngValue]=21>Inappropriate sexual touching</option>
+                                <option [ngValue]=22>Inappropriate sexual gestures</option>
+                                <option [ngValue]=23>Invading personal space in a sexual way</option>
+                                <option [ngValue]=24>Quid pro quo sexual harassment</option>
+                                <option [ngValue]=25>Preferential treatment or promises of preferential treatment to an employee for submitting to sexual conduct</option>
+                                <option [ngValue]=26>Exposing an employee to unwanted sexual attention or activity, or making their employees more difficult due to their sex.</option>
+                                <option [ngValue]=27>Sexual or discriminatory displays or publications anywhere in the workplace.</option>
+                                <option [ngValue]=28>Retaliation for sexual harassment complaints.</option>
+                                <option [ngValue]=29>Racial slurs</option>
+                                <option [ngValue]=30>Racial insults</option>
+                                <option [ngValue]=31>Racial jokes</option>
+                                <option [ngValue]=32>Degrading comments</option>
+                                <option [ngValue]=33>Disgust</option>
+                                <option [ngValue]=34>Intolerance of differences</option>
+                                <option [ngValue]=35>Gender Harassment</option>
+                                <option [ngValue]=36>Third-party harassment</option>
+                                <option [ngValue]=37>Verbal harassment</option>
+                                <option [ngValue]=38>Intolerance toward religious holidays</option>
+                                <option [ngValue]=39>Intolerance toward religious traditions</option>
+                                <option [ngValue]=40>Intolerance toward religious customs</option>
+                                <option [ngValue]=41>Cruel religious jokes</option>
+                                <option [ngValue]=42>Degrading stereotypical comments</option>
+                                <option [ngValue]=43>Pressures to convert religions</option>
+                                <option [ngValue]=44>Teased and insulted</option>
+                                <option [ngValue]=45>Left out of activities or meetings</option>
+                                <option [ngValue]=46>Unfairly criticized</option>
+                                <option [ngValue]=47>Disability-Based Harassment</option>
+                                <option [ngValue]=48>Sexual Orientation-Based Harassment</option>
+                                <option [ngValue]=49>Age-Based Harassment</option>
+                                <option [ngValue]=50>Inappropriate comments</option>
+                                <option [ngValue]=51>Offensive jokes</option>
+                                <option [ngValue]=52>Personal humiliation</option>
+                                <option [ngValue]=53>Critical remarks</option>
+                                <option [ngValue]=54>Ostracizing behaviors</option>
+                                <option [ngValue]=55>Intimidation tactics</option>
+                                <option [ngValue]=56>Direct threats of intent to inflict harm</option>
+                                <option [ngValue]=57>Physical attacks (hitting, shoving, kicking)</option>
+                                <option [ngValue]=58>Threatening behavior (shaking fists angrily)</option>
+                                <option [ngValue]=59>Destroying property to intimidate</option>
+                                <option [ngValue]=60>Isolating or denying the victim’s presence</option>
+                                <option [ngValue]=61>Belittling or trivializing the victim’s thoughts</option>
+                                <option [ngValue]=62>Discrediting or spreading rumors about the victim</option>
+                                <option [ngValue]=63>Opposing or challenging everything the victim says</option>
+                                <option [ngValue]=64>Share humiliating things about the victim by mass email or mass chat</option>
+                                <option [ngValue]=65>Spread lies or gossip about the victim on social media</option>
+                                <option [ngValue]=66>Send harassing instant messages or text messages directly to the victim</option>
+                                <option [ngValue]=67>Cyberbullying</option>
+                                <option [ngValue]=68>Retaliation harassment/ like someone else to get revenge and to prevent the victim from behaving in such a way again</option>
+                            </select>
+                          </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <nb-card>
+                        <nb-card-header>
+                            Complainee Information
+                            <button (click)="openComplaineeDialog();" nbButton status="success" style="float: right;"><nb-icon icon="search-outline"></nb-icon>Search Complainee</button>
+                        </nb-card-header>
+                        <nb-card-body>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <input formControlName="complaineeName" type="text" nbInput fullWidth placeholder="Full Name">
+                                    </div>
+                                </div>
+                            </div>  
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        Provide Email Address (complainant)
+                        <input placeholder="..." type="text" nbInput fullWidth formControlName="emailAddressComplainant">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        Provide Email Address of your supervisor or any with higher position from your office
+                        <input placeholder="..." type="text" nbInput fullWidth formControlName="emailAddressSupervisor">
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <span><p>
+                            Take Note:<br>
+                            Before you file your complaint:<br>
+                            You know who the person is to address your complaint to.<br>
+                            You know the form that your complaint should take?<br>
+                            You are aware of what you want to accomplish.<br>
+                            <br>
+                            The complaint in writing:<br>
+                            <br>
+                            You have stated your purpose clearly.<br>
+                            The reason you are making the complaint is obvious.<br>
+                            You have demonstrated the importance.<br>
+                            You have requested what you would like to see happen.<br>
+                            You have asked for a timely reply.<br>
+                            Your complaint is short and to the point.<br>
+                            You were polite.<br>
+                            You refrained from criticism and personal attacks.<br>
+                            You demonstrated that you have support.<br>
+                            You have determined the appropriateness of humor.<br>
+                            You are prepared to raise the stakes if necessary.<br>
+                            You have a copy of the complaint.<br>
+                        </p></span>
+                    </div>
+                </div>
+            </div>  
+        </nb-card-body>
+    </nb-card>
+    </form>
+</div>

@@ -1,0 +1,606 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+
+<form [formGroup]="PDSForm" *ngIf="this.PDSForm">
+<nb-card>
+  <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+  <nb-card-header>
+    Personal Data Sheet
+    <mat-accordion *ngIf="false">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Form value
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <code>
+          {{PDSForm.value | json}}
+        </code>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </nb-card-header>  
+  <mat-tab-group>
+    <mat-tab label="Personal Details"> 
+      <nb-card>
+        <nb-card-header>
+          Personal Information
+        </nb-card-header>
+      </nb-card>
+      <nb-card>
+        <nb-card-body>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                First Name:<input formControlName="firstName" type="text" nbInput fullWidth placeholder="First Name">
+                Middle Name:<input formControlName="middleName" type="text" nbInput fullWidth placeholder="Middle Name">
+                Last Name:<input formControlName="lastName" type="text" nbInput fullWidth placeholder="Last Name">
+                Extension Name:<input formControlName="extName" type="text" nbInput fullWidth placeholder="Name Extension">
+                Sex:<nb-select formControlName="sex" fullWidth placeholder="Male/Female" [(selected)]="selectedItemSex">
+                  <nb-option [value]=0>Male</nb-option>
+                  <nb-option [value]=1>Female</nb-option>
+                </nb-select>
+                Birth Date:<nb-datepicker #dateTimePicker></nb-datepicker>
+                <input formControlName="birthDate" nbInput fullWidth placeholder="Date of Birth" [nbDatepicker]="dateTimePicker">
+                Marital Status<nb-select formControlName="maritalStatus" fullWidth placeholder="Marital Status" [(selected)]="selectedItemMarital">
+                  <nb-option [value]=0>Anulled</nb-option>
+                  <nb-option [value]=1>Legally Separated</nb-option>
+                  <nb-option [value]=2>Married</nb-option>
+                  <nb-option [value]=3>Single</nb-option>
+                  <nb-option [value]=4>Widowed</nb-option>
+                </nb-select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                Citizenship:<nb-select formControlName="citizenship" fullWidth placeholder="Citizenship" [(selected)]="selectedCitizenship">
+                  <nb-option [value]=1>Filipino</nb-option>
+                </nb-select>
+                Blood Type:<nb-select formControlName="bloodType" fullWidth placeholder="Blood Type" [(selected)]="selectedBloodType">
+                  <nb-option value="0">O+</nb-option>
+                  <nb-option value="1">O-</nb-option>
+                  <nb-option value="2">A+</nb-option>
+                  <nb-option value="3">A-</nb-option>
+                  <nb-option value="4">B+</nb-option>
+                  <nb-option value="5">B-</nb-option>
+                  <nb-option value="6">AB+</nb-option>
+                  <nb-option value="7">AB-</nb-option>
+                </nb-select>
+                Height (m):<input formControlName="height" type="text" nbInput fullWidth placeholder="Height (m)">
+                Weight (kg):<input formControlName="weight" type="text" nbInput fullWidth placeholder="Weight (kg)">
+                GSIS:<input formControlName="gsis" type="text" nbInput fullWidth placeholder="GSIS">
+                SSS:<input formControlName="sss" type="text" nbInput fullWidth placeholder="SSS">
+                PhilHealth:<input formControlName="philHealth" type="text" nbInput fullWidth placeholder="PhilHealth">
+                PagIbig:<input formControlName="pagIbig" type="text" fullWidth nbInput placeholder="PagIbig">
+                TIN<input formControlName="tin" type="text" nbInput fullWidth placeholder="TIN">
+              </div>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-card>
+      <nb-card>
+        <nb-card-header>
+          Current Address
+        </nb-card-header>
+      </nb-card>
+        <div class="col-sm-6">
+          <div class="form-group">
+            Region:<nb-select formControlName="region_code" fullWidth placeholder="Region" (selectedChange)="onAddressChange('region',$event)" [(selected)]="selectedRegion">
+                <nb-option *ngFor="let region of lib_regions; let i = index" [value]="region.region_code">
+                    {{region.region_name}}
+                </nb-option>
+            </nb-select>
+            Province:<nb-select formControlName="prov_code" fullWidth placeholder="Province" (selectedChange)="onAddressChange('province',$event)" [(selected)]="selectedProvince">
+                <nb-option *ngFor="let province of lib_provinces_filtered; let i = index" [value]="province.prov_code" >
+                    {{province.prov_name}}
+                </nb-option>
+            </nb-select>
+            City:<nb-select formControlName="city_code" fullWidth placeholder="City/Municipality" (selectedChange)="onAddressChange('city',$event)" [(selected)]="selectedCity">
+              <nb-option *ngFor="let city of lib_cities_filtered; let i = index" [value]="city.city_code">
+                {{city.city_name}}
+              </nb-option>
+            </nb-select>
+            Barangay:<nb-select formControlName="brgy_code" fullWidth placeholder="Barangay" [(selected)]="selectedBrgy">
+              <nb-option *ngFor="let brgy of lib_barangays_filtered; let i = index" [value]="brgy.brgy_code">
+                {{brgy.brgy_name}}
+              </nb-option>
+            </nb-select>
+            Purok:<input formControlName="purok" type="text" nbInput fullWidth placeholder="Purok">
+            Zip Code:<input formControlName="zipCode" type="text" nbInput fullWidth placeholder="Zip Code">
+            Telephone:<input formControlName="telNo" type="text" nbInput fullWidth placeholder="Telephone">
+           </div>
+      </div>
+      <nb-card>
+        <nb-card-header>
+          Contact Information
+        </nb-card-header>
+      </nb-card>
+        <div class="col-sm-6">
+          <div class="form-group">
+            Mobile:<input formControlName="mobileNo" type="text" nbInput fullWidth placeholder="Mobile">
+            Email:<input formControlName="email" type="text" nbInput fullWidth placeholder="Email">
+           </div>
+      </div>
+    </mat-tab>
+    <!-- <mat-tab label="Assignment Details">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <nb-select fullWidth placeholder="Office Level" [(selected)]="selectedItem">
+            </nb-select>
+            <nb-select fullWidth placeholder="Region" [(selected)]="selectedItem">
+            </nb-select>
+            <nb-select fullWidth placeholder="Fund Source" [(selected)]="selectedItem">
+            </nb-select>
+            <nb-select fullWidth placeholder="Employment Status" [(selected)]="selectedItem">
+            </nb-select>
+            <nb-select fullWidth placeholder="Current Position" [(selected)]="selectedItem">
+            </nb-select>
+            <input nbInput fullWidth placeholder="Date Start Based on Current Contract" [nbDatepicker]="dateTimePicker">
+            <nb-datepicker #dateTimePicker></nb-datepicker>
+            <input nbInput fullWidth placeholder="Date End Based on Current Contract" [nbDatepicker]="dateTimePicker">
+            <nb-datepicker #dateTimePicker></nb-datepicker>
+          </div>  
+        </div>
+    </mat-tab> -->
+    <mat-tab label="Family">
+      <nb-card>
+        <nb-card-header>
+          Parent Information
+        </nb-card-header>
+      </nb-card>  
+      <nb-card>
+        <nb-card-body>
+          <div style="padding-bottom: 5px;">
+            <button (click)="createFamilyFormGroup(null,true);" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="person-add-outline"></nb-icon>&nbsp;&nbsp;Add Family Member</button>
+          </div>
+            <table>
+              <tr>
+                <th style="padding-right: 135px;">Action</th>
+                <th style="padding-right: 135px;">First Name</th>  
+                <th style="padding-right: 135px;">Middle Name</th> 
+                <th style="padding-right: 135px;">Last Name</th>   
+                <th style="padding-right: 10px;">Extension Name</th>   
+                <th style="padding-right: 30px;">Birth Date</th>  
+                <th style="padding-right: 135px;">Occupation</th>  
+                <th style="padding-right: 150px;">Employer</th>    
+                <th style="padding-right: 135px;">Business Address</th>    
+                <th style="padding-right: 10px;">Contact Number</th>    
+                <th style="padding-right: 135px;">Relationship</th>    
+              </tr>
+            <tr *ngFor="let family of personFamilyFormArray.controls;let i = index;let last = last;" [formGroup]="family">
+              <td>
+                <button (click)="editTableRecord('family',i);" *ngIf="selectedFamilyRecord != i" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="edit-2-outline"></nb-icon>Edit</button>
+                <button (click)="saveTableRecord('family');" *ngIf="selectedFamilyRecord == i" mat-raised-button style="background-color: #00d68f; color:white;"><nb-icon icon="save-outline"></nb-icon>Save</button>
+                &nbsp;<button mat-raised-button style="background-color:#ff3d71; color:white;"><nb-icon icon="trash-outline"></nb-icon>Delete</button>
+              </td>
+              <td>
+                <mat-form-field style="width: 210px;" *ngIf="selectedFamilyRecord == i">
+                  <input formControlName="firstName" placeholder="Enter First Name"  matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedFamilyRecord != i">{{family.value.firstName}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 220px;" *ngIf="selectedFamilyRecord == i">
+                  <input formControlName="middleName" placeholder="Enter Middle Name" matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedFamilyRecord != i">{{family.value.middleName}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 210px;" *ngIf="selectedFamilyRecord == i">
+                  <input formControlName="lastName" placeholder="Enter Last Name"  matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedFamilyRecord != i">{{family.value.lastName}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 120px;" *ngIf="selectedFamilyRecord == i">
+                  <input formControlName="extName" placeholder="Enter Extension Name" matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedFamilyRecord != i">{{family.value.extName}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 100px;" *ngIf="selectedFamilyRecord == i">
+                  <input matInput [matDatepicker]="picker1" placeholder="Enter Birth Date"  formControlName="birthDate" style="color: black">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #picker1></mat-datepicker>
+                </mat-form-field>
+                <span *ngIf="selectedFamilyRecord != i">{{family.value.birthDate | date:'MM/dd/yyyy'}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 210px;" *ngIf="selectedFamilyRecord == i">
+                  <input formControlName="occupation" placeholder="Enter Occupation" matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedFamilyRecord != i">{{family.value.occupation}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 210px;" *ngIf="selectedFamilyRecord == i">
+                  <input formControlName="employer" placeholder="Enter Employer Name"  matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedFamilyRecord != i">{{family.value.employer}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 250px;" *ngIf="selectedFamilyRecord == i">
+                  <input formControlName="businessAddress" placeholder="Enter Business Address"  matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedFamilyRecord != i">{{family.value.businessAddress}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 120px;" *ngIf="selectedFamilyRecord == i">
+                  <input formControlName="telNo" placeholder="Enter Contact Number" matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedFamilyRecord != i">{{family.value.telNo}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 210px;" *ngIf="selectedFamilyRecord == i">
+                  <mat-label>Select Relationship Status</mat-label>
+                  <mat-select  formControlName="relationship">
+                    <mat-option [value]=0>Mother</mat-option>
+                    <mat-option [value]=1>Father</mat-option>
+                    <mat-option [value]=2>Sister</mat-option>
+                    <mat-option [value]=3>Brother</mat-option>
+                    <mat-option [value]=4>Grand Father</mat-option>
+                    <mat-option [value]=5>Grand Mother</mat-option>
+                    <mat-option [value]=6>Aunt</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <span *ngIf="selectedFamilyRecord != i">{{family.value.relationship}}</span>
+              </td>
+            </tr> 
+            </table>
+        </nb-card-body>
+          <mat-accordion *ngIf="false">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Form value
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <code>
+                {{PDSForm.value | json}}
+              </code>
+            </mat-expansion-panel>
+          </mat-accordion>
+      </nb-card>
+    </mat-tab>
+    <mat-tab label="Education"> 
+      <nb-card>
+        <nb-card-header>
+          Education Information
+        </nb-card-header>
+        <nb-card>
+          <nb-card-body>
+            <div style="padding-bottom: 5px;">
+              <button (click)="createEducationFormGroup(null,true);" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="person-add-outline"></nb-icon>&nbsp;&nbsp;Add Education</button>
+            </div>
+            <table>
+              <tr>
+                <th style="padding-right: 135px;">Action</th>
+                <th style="padding-right: 220px;">School Name</th>  
+                <th style="padding-right: 135px;">Level</th> 
+                <th style="padding-right: 5px;">Year Graduated</th>   
+                <th style="padding-right: 30px;">Start Date</th>  
+                <th style="padding-right: 40px;">End Date</th>
+                <th style="padding-right: 200px;">Degree / Course</th>
+                <th style="padding-right: 10px;">Highest Attainment</th>
+                <th style="padding-right: 10px;">Scholarship / Award / Honor</th>
+              </tr>
+              <tr *ngFor="let education of personEducationFormArray.controls;let i = index;let last = last;" [formGroup]="education">
+              <td>
+                  <button (click)="editTableRecord('education',i);" *ngIf="selectedEducationRecord != i" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="edit-2-outline"></nb-icon>Edit</button>
+                  <button (click)="saveTableRecord('education');" *ngIf="selectedEducationRecord == i" mat-raised-button style="background-color: #00d68f; color:white;"><nb-icon icon="save-outline"></nb-icon>Save</button>
+                  &nbsp;<button mat-raised-button style="background-color:#ff3d71; color:white;"><nb-icon icon="trash-outline"></nb-icon>Delete</button>
+              </td>
+              <td>
+                <mat-form-field style="width: 310px;" *ngIf="selectedEducationRecord == i">
+                  <input formControlName="nameOfSchool" placeholder="Enter School Name" matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedEducationRecord != i">{{education.value.nameOfSchool}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 170px;" *ngIf="selectedEducationRecord == i">
+                  <mat-label>Select School Level</mat-label>
+                  <mat-select  formControlName="schoolLevelId">
+                    <mat-option [value]=0>Primary</mat-option>
+                    <mat-option [value]=1>Secondary</mat-option>
+                    <mat-option [value]=2>Vocational</mat-option>  
+                    <mat-option [value]=3>Tertiary - Undergraduate</mat-option>
+                    <mat-option [value]=4>Tertiary - Graduate</mat-option>
+                    <mat-option [value]=5>Tertiary - Doctoral</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <span *ngIf="selectedEducationRecord != i">{{education.value.schoolLevelId}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 110px;" *ngIf="selectedEducationRecord == i">
+                  <input formControlName="yearGraduated" placeholder="Enter Year Graduated" matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedEducationRecord != i">{{education.value.yearGraduated}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 100px;" *ngIf="selectedEducationRecord == i">
+                  <input matInput [matDatepicker]="picker2" placeholder="Enter Start Date" formControlName="startDate" style="color: black">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #picker2></mat-datepicker>
+                </mat-form-field>
+                <span *ngIf="selectedEducationRecord != i">{{education.value.startDate | date:'MM/dd/yyyy'}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 100px;" *ngIf="selectedEducationRecord == i">
+                  <input matInput [matDatepicker]="picker3" placeholder="Enter End Date" formControlName="endDate" style="color: black">
+                  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #picker3></mat-datepicker>
+                </mat-form-field>
+                <span *ngIf="selectedEducationRecord != i">{{education.value.endDate | date:'MM/dd/yyyy'}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 300px;" *ngIf="selectedEducationRecord == i">
+                  <input formControlName="degreeCourse" placeholder="Enter Degree/Course" matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedEducationRecord != i">{{education.value.degreeCourse}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 150px;" *ngIf="selectedEducationRecord == i">
+                  <input formControlName="highestAttaind" placeholder="Enter Highest Attainment" matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedEducationRecord != i">{{education.value.highestAttaind}}</span>
+              </td>
+              <td>
+                <mat-form-field style="width: 210px;" *ngIf="selectedEducationRecord == i">
+                  <input formControlName="scholarshipAwardHonor" placeholder="Enter Scholarship/Award/Honor" matInput/>
+                </mat-form-field>
+                <span *ngIf="selectedEducationRecord != i">{{education.value.scholarshipAwardHonor}}</span>
+              </td>
+            </tr>
+            </table>
+          </nb-card-body>
+          <mat-accordion *ngIf="false">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Form value
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <code>
+                {{personEducationFormArray.value | json}}
+              </code>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </nb-card>
+      </nb-card>
+    </mat-tab>
+    <mat-tab label="Eligibility">
+      <nb-card>
+        <nb-card-header>
+          Eligibility Information
+        </nb-card-header>
+        <nb-card>
+          <nb-card-body>
+            <div style="padding-bottom: 5px;">
+              <button (click)="createEligibilitiesFormGroup(null,true);" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="person-add-outline"></nb-icon>&nbsp;&nbsp;Add Eligibility</button>
+            </div>
+            <table>
+              <tr>
+                <th style="padding-right: 135px;">Action</th>
+                <th style="padding-right: 220px;">Eligibility</th>
+                <th style="padding-right: 20px;">Rating</th>
+                <th style="padding-right: 20px;">Date Of Exam</th>
+                <th style="padding-right: 135px;">Place Of Exam</th>
+                <th style="padding-right: 135px;">License Number</th>
+                <th style="padding-right: 40px;">Date Of Release</th>
+              </tr>
+              <tr *ngFor="let personEligibility of personEligibilityFormArray.controls; let i = index; let last = last;" [formGroup]="personEligibility">
+                <td>
+                  <button (click)="editTableRecord('eligibility',i);" *ngIf="selectedEligibilityRecord != i" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="edit-2-outline"></nb-icon>Edit</button>
+                  <button (click)="saveTableRecord('eligibility',i);" *ngIf="selectedEligibilityRecord == i" mat-raised-button style="background-color: #00d68f; color:white;"><nb-icon icon="save-outline"></nb-icon>Save</button>
+                  &nbsp;<button mat-raised-button style="background-color:#ff3d71; color:white;"><nb-icon icon="trash-outline"></nb-icon>Delete</button>
+                </td> 
+                <td>
+                  <mat-form-field style="width: 280px;" *ngIf="selectedEligibilityRecord == i">
+                    <input formControlName="eligibilityTitle" placeholder="Enter Eligibility" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedEligibilityRecord != i">{{personEligibility.value.eligibilityTitle}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 60px;" *ngIf="selectedEligibilityRecord == i">
+                    <input type="number" formControlName="rating" placeholder="Enter Rating" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedEligibilityRecord != i">{{personEligibility.value.rating}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 100px;" *ngIf="selectedEligibilityRecord == i">
+                    <input matInput [matDatepicker]="picker4" placeholder="Enter Date of Examination" formControlName="dateOfExamination" style="color: black">
+                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker4></mat-datepicker>
+                  </mat-form-field>
+                  <span *ngIf="selectedEligibilityRecord != i">{{personEligibility.value.dateOfExamination | date:'MM/dd/yyyy'}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 230px;" *ngIf="selectedEligibilityRecord == i">
+                    <input formControlName="placeOfExamination" placeholder="Enter Place of Examination" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedEligibilityRecord != i">{{personEligibility.value.placeOfExamination}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 230px;" *ngIf="selectedEligibilityRecord == i">
+                    <input formControlName="licenseNumber" placeholder="Enter License Number" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedEligibilityRecord != i">{{personEligibility.value.licenseNumber}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 110px;" *ngIf="selectedEligibilityRecord == i">
+                    <input matInput [matDatepicker]="picker5" placeholder="Enter Release Date" formControlName="licensceReleaseDate" style="color: black">
+                    <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker5></mat-datepicker>
+                  </mat-form-field>
+                  <span *ngIf="selectedEligibilityRecord != i">{{personEligibility.value.licensceReleaseDate | date:'MM/dd/yyyy'}}</span>
+                </td>
+              </tr>
+            </table>
+          </nb-card-body>
+        </nb-card>
+      </nb-card>
+    </mat-tab>
+    <mat-tab label="Work Experiences">
+      <nb-card>
+        <nb-card-header>
+          Work Experiences
+        </nb-card-header>
+        <nb-card>
+          <nb-card-body>
+            <div style="padding-bottom: 5px;">
+              <button (click)="createWorkExperiencesFormGroup(null,true);" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="person-add-outline"></nb-icon>&nbsp;&nbsp;Add Work Experience</button>
+            </div>
+            <table>
+              <tr>
+                <th style="padding-right: 135px;">Action</th>
+                <th style="padding-right: 220px;">Position</th>
+                <th style="padding-right: 220px;">Company Name</th>
+                <th style="padding-right: 30px;">Start Date</th>
+                <th style="padding-right: 40px;">End Date</th>
+                <th style="padding-right: 20px;">Monthly Salary</th>
+                <th style="padding-right: 20px;">Salary Grade</th>
+                <th style="padding-right: 20px;">Salary Step</th>
+                <th style="padding-right: 20px;">Appointment Status</th>
+                <th style="padding-right: 20px;">Is Government</th>
+              </tr>
+              <tr *ngFor="let personWorkExperience of personWorkExperienceFormArray.controls; let i = index" [formGroup]="personWorkExperience">
+                <td>
+                  <button (click)="editTableRecord('workExperience',i);" *ngIf="selectedWorkExpRecord != i" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="edit-2-outline"></nb-icon>Edit</button>
+                  <button (click)="saveTableRecord('workExperience',i);" *ngIf="selectedWorkExpRecord == i" mat-raised-button style="background-color: #00d68f; color:white;"><nb-icon icon="save-outline"></nb-icon>Save</button>
+                  &nbsp;<button mat-raised-button style="background-color:#ff3d71; color:white;"><nb-icon icon="trash-outline"></nb-icon>Delete</button>
+              </td> 
+                <td>
+                  <mat-form-field style="width: 270px;" *ngIf="selectedWorkExpRecord == i">
+                    <input formControlName="positionTitle" placeholder="Enter Position" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedWorkExpRecord != i">{{personWorkExperience.value.positionTitle}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 320px;" *ngIf="selectedWorkExpRecord == i">
+                    <input formControlName="companyName" placeholder="Enter Company Name" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedWorkExpRecord != i">{{personWorkExperience.value.companyName}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 100px;" *ngIf="selectedWorkExpRecord == i">
+                    <input matInput [matDatepicker]="picker6" placeholder="Enter Start Date" formControlName="startDate" style="color: black">
+                    <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker6></mat-datepicker>
+                  </mat-form-field>
+                  <span *ngIf="selectedWorkExpRecord != i">{{personWorkExperience.value.startDate | date:'MM/dd/yyyy'}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 100px;" *ngIf="selectedWorkExpRecord == i">
+                    <input matInput [matDatepicker]="picker7" placeholder="Enter End Date" formControlName="endDate" style="color: black">
+                    <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker7></mat-datepicker>
+                  </mat-form-field>
+                  <span *ngIf="selectedWorkExpRecord != i">{{personWorkExperience.value.endDate | date:'MM/dd/yyyy'}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 120px;" *ngIf="selectedWorkExpRecord == i">
+                    <input type="number" formControlName="monthlySalary" placeholder="Enter Monthly Salary" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedWorkExpRecord != i">{{personWorkExperience.value.monthlySalary}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 100px;" *ngIf="selectedWorkExpRecord == i">
+                    <input type="number" formControlName="salaryGrade" placeholder="Enter Salary Grade" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedWorkExpRecord != i">{{personWorkExperience.value.salaryGrade}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 100px;" *ngIf="selectedWorkExpRecord == i">
+                    <input type="number" formControlName="salaryStep" placeholder="Enter Salary Step" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedWorkExpRecord != i">{{personWorkExperience.value.salaryStep}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 150px;" *ngIf="selectedWorkExpRecord == i">
+                    <mat-label>Select Appointment Status</mat-label>
+                    <mat-select  formControlName="appointmentStatusId">
+                      <mat-option [value]=1>Regular</mat-option>
+                      <mat-option [value]=2>Contractual</mat-option>
+                      <mat-option [value]=3>MOA</mat-option>
+                      <mat-option [value]=4>Specialist</mat-option>
+                      <mat-option [value]=5>Job Order</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <span *ngIf="selectedWorkExpRecord != i">{{personWorkExperience.value.appointmentStatusId}}</span>
+                </td>
+                <td>
+                  <mat-checkbox class="example-margin" *ngIf="selectedWorkExpRecord == i" formControlName="isGovt"></mat-checkbox>
+                  <span *ngIf="selectedWorkExpRecord != i">{{personWorkExperience.value.isGovt}}</span>
+                </td>
+              </tr>
+            </table>
+          </nb-card-body>
+        </nb-card>
+      </nb-card>
+    </mat-tab>
+    <mat-tab label="Training Programs"> 
+      <nb-card>
+        <nb-card-header>
+          Training Programs
+        </nb-card-header>
+        <nb-card>
+          <nb-card-body>
+            <div style="padding-bottom: 5px;">
+              <button (click)="createTrainingFormGroup(null,true);" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="person-add-outline"></nb-icon>&nbsp;&nbsp;Add Training</button>
+            </div>
+            <table>
+              <tr>
+                <th style="padding-right: 135px;">Action</th>
+                <th style="padding-right: 135px;">Training/Seminar</th>
+                <th style="padding-right: 80px;">From</th>
+                <th style="padding-right: 90px;">To</th>
+                <th style="padding-right: 10px;">Number of Hours</th>
+                <th style="padding-right: 135px;">Conducted By</th>
+              </tr>
+              <tr *ngFor="let personTraining of personTrainingFormArray.controls; let i = index" [formGroup]="personTraining">
+                <td>
+                  <button (click)="editTableRecord('training',i);" *ngIf="selectedTrainingRecord != i" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="edit-2-outline"></nb-icon>Edit</button>
+                  <button (click)="saveTableRecord('training',i);" *ngIf="selectedTrainingRecord == i" mat-raised-button style="background-color: #00d68f; color:white;"><nb-icon icon="save-outline"></nb-icon>Save</button>
+                  &nbsp;<button mat-raised-button style="background-color:#ff3d71; color:white;"><nb-icon icon="trash-outline"></nb-icon>Delete</button>
+                </td>
+                <td>
+                  <mat-form-field style="width: 250px;" *ngIf="selectedTrainingRecord == i">
+                    <input formControlName="seminarTitle" placeholder="Seminar / Training Attended" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedTrainingRecord != i">{{personTraining.value.seminarTitle}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 100px;" *ngIf="selectedTrainingRecord == i">
+                    <input matInput placeholder="Enter Start Date" [matDatepicker]="picker8" formControlName="dateFrom" style="color: black">
+                    <mat-datepicker-toggle matSuffix [for]="picker8"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker8></mat-datepicker>
+                  </mat-form-field>
+                  <span *ngIf="selectedTrainingRecord != i">{{personTraining.value.dateFrom | date:'MM/dd/yyyy'}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 100px;" *ngIf="selectedTrainingRecord == i">
+                    <input matInput placeholder="Enter End Date" [matDatepicker]="picker9" formControlName="dateTo" style="color: black">
+                    <mat-datepicker-toggle matSuffix [for]="picker9"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker9></mat-datepicker>
+                  </mat-form-field>
+                  <span *ngIf="selectedTrainingRecord != i">{{personTraining.value.dateTo | date:'MM/dd/yyyy'}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 120px;" *ngIf="selectedTrainingRecord == i">
+                    <input type="number" placeholder="Enter Number of Hours" formControlName="numHours" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedTrainingRecord != i">{{personTraining.value.numHours}}</span>
+                </td>
+                <td>
+                  <mat-form-field style="width: 220px;" *ngIf="selectedTrainingRecord == i">
+                    <input placeholder="Enter Conducted By" formControlName="conductedBy" matInput/>
+                  </mat-form-field>
+                  <span *ngIf="selectedTrainingRecord != i">{{personTraining.value.conductedBy}}</span>
+                </td>
+              </tr>
+            </table>
+          </nb-card-body>
+        </nb-card>
+      </nb-card>
+    </mat-tab>
+  </mat-tab-group>
+</nb-card>
+</form> 

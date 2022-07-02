@@ -1,0 +1,93 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+<form [formGroup]="ClearanceForm" *ngIf="this.ClearanceForm">
+    <nb-card>
+        <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+        <nb-card-header>
+            Clearance Form
+        </nb-card-header>
+    </nb-card>
+    <nb-card>
+        <nb-card-header>
+            I. Purpose
+        </nb-card-header>
+        <nb-card-body>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group" [formGroup]="PDSForm">
+                        Name of Employee:&nbsp;
+                        <input (click)="openParticipantDialog();" formControlName="fullName" type="text" nbInput fullWidth placeholder="..">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <div class="form-group">
+                        <b><u>TO: DEPARTMENT OF HEALTH - CVCHD</u></b><br>
+                        <span>I hereby apply for clearance from money, property and work-related accountabilities for:</span><br>
+                        Purpose:<br>
+                        &nbsp;&nbsp;<mat-checkbox class="example-margin"  formControlName="isTransfer"></mat-checkbox>&nbsp;Transfer
+                        &nbsp;&nbsp;<mat-checkbox class="example-margin"  formControlName="isRetirement"></mat-checkbox>&nbsp;Retirement
+                        &nbsp;&nbsp;<mat-checkbox class="example-margin"  formControlName="isResignation"></mat-checkbox>&nbsp;Resignation
+                        &nbsp;&nbsp;<mat-checkbox class="example-margin"  formControlName="isLeave"></mat-checkbox>&nbsp;Leave
+                        <br>
+                        &nbsp;&nbsp;<mat-checkbox class="example-margin"  formControlName="isOther"></mat-checkbox>&nbsp;Other Mode of Separation
+                        <br>Please specify:&nbsp;<input formControlName="specifyOther" type="text" nbInput placeholder="..">
+                
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        Effectivity/Inclusive Period:&nbsp;
+                        <input formControlName="effectivityInclusivePeriod" type="text" nbInput fullWidth placeholder="..">
+                   </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        Date of Application:<nb-datepicker #dateTimePicker></nb-datepicker>
+                        <input formControlName="dateOfApplication" nbInput fullWidth placeholder="Date of Application" [nbDatepicker]="dateTimePicker">
+                    </div>
+                </div>
+            </div>
+        </nb-card-body>
+    </nb-card>
+    <nb-card>
+        <nb-card-header>
+            II. Clearance From Work-Related Accountabilities
+        </nb-card-header>
+        <nb-card-body>
+            <div class="row">
+                <span>We hereby certify that this applicant is cleared of work-related accountabilities from this Unit/Office/Dept.</span>
+                <br><br><br>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input formControlName="immediateSupervisor" type="text" nbInput fullWidth placeholder="..">
+                        Immediate Supervisor
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input formControlName="divisionHead" type="text" nbInput fullWidth placeholder="..">
+                        Division Head
+                    </div>
+                </div>
+            </div>
+        </nb-card-body>
+    </nb-card>
+    <nb-card>
+        <nb-card-header>
+            III. Certification of no pending administrative case
+        </nb-card-header>
+        <nb-card-body>
+            <div class="row">
+                <div class="col-sm-6">
+                    <mat-checkbox class="example-margin"  formControlName="withPendingAdminCase"></mat-checkbox>&nbsp;With Pending Administrative Case<br>
+                    <mat-checkbox class="example-margin"  formControlName="withOnGoingInvestigation"></mat-checkbox>&nbsp;With OnGoing Investigation (no formal charge yet)<br>
+                </div>
+            </div>
+        </nb-card-body>
+    </nb-card>
+</form>
+</div>

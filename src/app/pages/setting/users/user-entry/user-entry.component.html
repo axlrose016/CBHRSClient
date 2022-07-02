@@ -1,0 +1,28 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+    <form [formGroup]="UserForm" *ngIf="this.UserForm">
+        <nb-card>
+            <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+            <nb-card-header>
+              User Form
+            </nb-card-header>
+        </nb-card>
+        <nb-card>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="userId" type="text" nbInput fullWidth placeholder="User ID">
+                            <input formControlName="userName" type="text" nbInput fullWidth placeholder="User Name">
+                            <nb-select formControlName="user_level" fullWidth placeholder="User Level" [(selected)]="selectedUserLevel">
+                                <nb-option *ngFor="let user_lvl of lib_user_levels; let i = index" [value]="user_lvl.userLevelId">
+                                    {{user_lvl.description}}
+                                </nb-option>
+                            </nb-select>
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </form>
+</div>

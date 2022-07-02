@@ -1,0 +1,128 @@
+<axl-app-list  (applistbtnclick)='eventHandler($event)'></axl-app-list>
+<div class="container">
+  <nb-card>
+    <nb-card-header>
+      Personal Data Sheet
+    </nb-card-header>
+    <mat-tab-group>
+      <mat-tab label="List">
+      <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+        <nb-card>
+          <nb-card-body>
+            <!-- <table #exportTable>
+              <tr>
+                <th style="padding-right: 135px;">Person ID</th>
+                <th style="padding-right: 135px;">First Name</th>
+                <th style="padding-right: 135px;">Middle Name</th>
+                <th style="padding-right: 135px;">Last Name</th>
+                <th style="padding-right: 135px;">Ext. Name</th>
+                <th style="padding-right: 135px;">Sex</th>
+                <th style="padding-right: 135px;">Date Of Birth</th>
+                <th style="padding-right: 135px;">Place Of Birth</th>
+                <th style="padding-right: 135px;">Marital Status</th>
+                <th style="padding-right: 135px;">Citizenship</th>
+                <th style="padding-right: 135px;">Blood Type</th>
+              </tr>
+              <tr *ngFor="let pds of gridDataSource.data;let i = index;let last = last" (click)="onUserRowSelect(pds.personId)">
+                <td><span>{{pds.personId}}</span></td>
+                <td><span>{{pds.firstName}}</span></td>
+                <td><span>{{pds.middleName}}</span></td>
+                <td><span>{{pds.lastName}}</span></td>
+                <td><span>{{pds.extName}}</span></td>
+                <td><span>{{pds.sex}}</span></td>
+                <td><span>{{pds.dateOfBirth}}</span></td>
+                <td><span>{{pds.placeOfBirth}}</span></td>
+                <td><span>{{pds.maritalStatus}}</span></td>
+                <td><span>{{pds.citizenship}}</span></td>
+                <td><span>{{pds.bloodType}}</span></td>
+              </tr>
+            </table> -->
+            <mat-form-field appearance="standard" style="float:right; width: 100%;">
+              <input matInput (keyup)="applyFilter($event)" placeholder="Search.." #input>
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+
+            <table mat-table #table class="mat-elevation-z8" [dataSource]="gridDataSource" matSort>
+              <ng-container matColumnDef="personId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Person ID </th>
+                <td mat-cell *matCellDef="let erow" > {{erow.personId}} </td>
+              </ng-container>  
+
+              <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> First Name </th>
+                <td mat-cell *matCellDef="let erow" > {{erow.firstName}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="middleName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Middle Name </th>
+                <td mat-cell *matCellDef="let erow" >{{erow.middleName}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Last Name </th>
+                <td mat-cell *matCellDef="let erow">{{erow.lastName}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="extName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 100px;"> Ext. Name </th>
+                <td mat-cell *matCellDef="let erow">{{erow.extName}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="sex">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header  style="width: 100px;"> Sex </th>
+                <td mat-cell *matCellDef="let erow"> {{erow.sex}} </td>
+              </ng-container>  
+
+              <ng-container matColumnDef="birthDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header  style="width: 120px;"> Birth Date </th>
+                <td mat-cell *matCellDef="let erow"> {{erow.birthDate | date:'yyyy-MM-dd'}} </td>
+              </ng-container>  
+
+              <ng-container matColumnDef="placeOfBirth">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header  style="width: 200px;"> Place of Birth </th>
+                <td mat-cell *matCellDef="let erow"> {{erow.placeOfBirth}} </td>
+              </ng-container>  
+
+                <ng-container matColumnDef="civil_status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header  style="width: 120px;"> Civil Status </th>
+                <td mat-cell *matCellDef="let erow"> {{erow.civil_status}} </td>
+              </ng-container>  
+
+              <ng-container matColumnDef="citizenship">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header  style="width: 120px;"> Citizenship </th>
+                <td mat-cell *matCellDef="let erow"> {{erow.citizenship}} </td>
+              </ng-container>  
+
+              <ng-container matColumnDef="blood_type">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header  style="width: 120px;"> Blood Type </th>
+                <td mat-cell *matCellDef="let erow"> {{erow.blood_type}} </td>
+              </ng-container>  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onUserRowSelect(row.personId)"></tr>
+            </table>  
+            <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+          </nb-card-body>
+        </nb-card>
+      </mat-tab>
+      <mat-tab label="Reports">
+        <nb-card>
+          <nb-card-header>Master List</nb-card-header>
+          <nb-card-body>
+              <div class="row">
+                  <div class="col-sx">
+                      <a class="button button1" (click)="exportTableList()">Export   <i class="far fa-file-excel"></i></a>
+                  </div>
+                  <div class="col-lg">
+                      <span><p>Report Details: Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                      </p></span> 
+                  </div>
+              </div>
+          </nb-card-body>
+        </nb-card>
+      </mat-tab>
+    </mat-tab-group>
+  </nb-card>
+    
+
+</div>

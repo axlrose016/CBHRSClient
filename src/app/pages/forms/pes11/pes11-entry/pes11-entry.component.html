@@ -1,0 +1,651 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+    <form [formGroup]="PES11Form" *ngIf="this.PES11Form">
+        <nb-card>
+            <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+            <nb-card-header>
+                PERFORMANCE EVALUATION FORM											
+            </nb-card-header>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                PROFESSIONAL/TECHNICAL PERSONNEL (SG 11 AND ABOVE)											
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group" [formGroup]="PDSForm">
+                            Name of Employee:&nbsp;
+                            <input (click)="openParticipantDialog();" formControlName="fullName" type="text" nbInput fullWidth placeholder="..">
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                PERFORMANCE COMPETENCIES
+            </nb-card-header>
+            <nb-card-body>
+                <p>
+                    describe the level of his/her performance as identified under categories on which 1 being the lowest and 5 the highest											
+                </p>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                ANALYTICAL SKILLS
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Synthesizes complex or diverse information:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_diverseInfo" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Colects and researches data:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_researchesData" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Uses intuition and experience to complement data:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_usesIntuition" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Indentifies data relationships and dependencies:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_identifiesData" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Designs workflows and procedures:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_designsWorkflows" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                INITIATIVE
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Volunteers readily:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_volunteersReadily" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Undertakes self-development activities:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_undertakeSelfDev" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Seeks increased responsibilities:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_seekIncResponsibilities" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Takes independent actions and calculated risks:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_takeIndActions" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Looks for and takes advantage of opportunities:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_takesAdvantage" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Asks for help when needed:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_askForHelp" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                INNOVATION
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Displays original thinking and creativity:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_creativity" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Meets challenges with resourcefulness:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_resourceful" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Generates suggestions for improving work:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_improveWork" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Develops innovative approaches and ideas:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_devInnovateIdeas" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+        
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                JOB KNOWLEDGE
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Competent in required job skills and knowledge:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_competent" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Exhibits ability to learn and apply new skills:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_exhibitAbility" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Keeps abreast of current developments:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_keepsAbreast" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Requires minimal supervision:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_minimalSupervision" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Displays understanding of how jobs relates others:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_displaysUnderstanding" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Uses resources effectively:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_usesResources" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                PLANNING & ORGANIZATION
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Prioritizes and plans work activities:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_plansWorkAct" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Uses time efficiently:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_usesTimeEff" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Plans for additional resources:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_plansForAddResources" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Integrates changes smoothly:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_integratesChanges" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Sets goals and objectives:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_setsGoals" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Works in an organized manner:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_worksOrganizedManner" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                TEAMWORK
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Balances team and individual responsibilities:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_balancesTeam" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Exhibits objectivity and openness to others' views:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_exhibitsObjective" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Gives and welcomes feedback:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_welcomesFeedback" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Contributes to building a positive team spirit:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_contribute" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Puts success of team above own interests:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_putsSuccess" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                COMMUNICATIONS
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Expresses ideas and thoughts verbally:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_expressesIdeas" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Writes clearly and informatively:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_writesClearly" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Exhibits good listening and comprehension:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_exhibitsGoodListening" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Keeps others adequately informed:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_keepsOtherAdequate" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Uses appropriate communication methods:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_usesAppCom" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Present data effectively:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_presenDataEff" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+                BEHAVIORAL FACTORS
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Courtesy:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_courtesy" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Human Relations:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_humanRelations" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Integrity:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_integrity" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Stress Tolerance:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_stressTolerance" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Compliance to Office Rules and Regulations:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_complianceToOffice" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Puctuality and Attendance:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="scr_punctuality" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+        <nb-card>
+            <nb-card-header>
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Grand Total:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="grandTotal" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            Average Point Score:&nbsp;
+                       </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input formControlName="avgPoint" type="number" nbInput fullWidth placeholder="..">
+                       </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </form>
+</div>

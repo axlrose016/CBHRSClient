@@ -1,0 +1,51 @@
+<axl-app-list  (applistbtnclick)='eventHandler($event)'></axl-app-list>
+<div class="container">
+    <nb-card>
+        <nb-card-header>
+            Clearance List
+        </nb-card-header>
+        <mat-tab-group>
+            <mat-tab label="List">
+                <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+                    <nb-card>
+                        <nb-card-body>
+                            <mat-form-field appearance="standard" style="float:right;width:100%;">
+                                <input matInput (keyup)="applyFilter($event)" placeholder="Search.." #input>
+                                <mat-icon matSuffix>search</mat-icon>
+                            </mat-form-field>
+
+                            <table mat-table #table class="mat-elevation-z8" [dataSource]="gridDataSource" matSout>
+                                <ng-container matColumnDef="clearanceId">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;">Clearance ID</th>
+                                    <td mat-cell *matCellDef="let erow">{{erow.clearanceId}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="firstName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> First Name </th>
+                                    <td mat-cell *matCellDef="let erow" > {{erow.firstName}} </td>
+                                  </ng-container>
+                    
+                                  <ng-container matColumnDef="middleName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Middle Name </th>
+                                    <td mat-cell *matCellDef="let erow" >{{erow.middleName}}</td>
+                                  </ng-container>
+                    
+                                  <ng-container matColumnDef="lastName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Last Name </th>
+                                    <td mat-cell *matCellDef="let erow">{{erow.lastName}}</td>
+                                  </ng-container>
+
+                                  <ng-container matColumnDef="dateOfApplication">
+                                      <th mat-header-cell *matHeaderCellDef mat-sort-header srtle="width: 230px;"> Date Of Application </th>
+                                      <td mat-cell *matCellDef="let erow">{{erow.dateOfApplication}}</td>
+                                  </ng-container>
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onUserRowSelect(row.clearanceId)"></tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[5,10,15]" showFirstLastButton></mat-paginator>
+                        </nb-card-body>
+                    </nb-card>
+            </mat-tab>
+        </mat-tab-group>
+    </nb-card>
+</div>

@@ -1,0 +1,35 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+    <form [formGroup]="OrgGoalForm" *ngIf="this.OrgGoalForm">
+        <nb-card>
+            <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+            <nb-card-header>
+                Organizational Goal
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Mandates of the office</mat-label>
+                                <textarea formControlName="mandateOfOffice" matInput placeholder="..."></textarea>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Vision of the office</mat-label>
+                                <textarea formControlName="visionOfOffice" matInput placeholder="..."></textarea>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Mission of the office</mat-label>
+                                <textarea formControlName="missionOfOffice" matInput placeholder="..."></textarea>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width" style="width:100%" appearance="fill">
+                                <mat-label>Strategic goals of the office</mat-label>
+                                <textarea formControlName="stratigicGoalsOfOffice" matInput placeholder="..."></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>  
+            </nb-card-body>
+        </nb-card>
+    </form>
+</div>

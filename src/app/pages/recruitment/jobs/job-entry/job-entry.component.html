@@ -1,0 +1,49 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+    <form [formGroup]="JobRequisitionForm" *ngIf="this.JobRequisitionForm">
+        <nb-card>
+            <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+            <nb-card-header>
+                Job Requisition Form
+            </nb-card-header>
+        </nb-card>
+        <nb-card>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input nbInput  [matDatepicker]="dtrequestDate" placeholder="Date Requested"  formControlName="requestDate" style="color: black">
+                            <mat-datepicker-toggle matSuffix [for]="dtrequestDate"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #dtrequestDate></mat-datepicker>
+                            <nb-select formControlName="requestTypeId" fullWidth placeholder="Request Type"  [(selected)]="selectedRequestType">
+                                <nb-option *ngFor="let request_type of lib_request_type; let i = index" [value]="request_type.requestTypeId">
+                                    {{request_type.description}}
+                                </nb-option>
+                            </nb-select>
+                            <nb-select formControlName="departmentId" fullWidth placeholder="Department"  [(selected)]="selectedDepartment">
+                                <nb-option *ngFor="let department of lib_department; let i = index" [value]="department.departmentId">
+                                    {{department.description}}
+                                </nb-option>
+                            </nb-select>
+                            <input formControlName="locationAddress" type="text" nbInput fullWidth placeholder="Location">
+                            <nb-select formControlName="jobCategoryId" fullWidth placeholder="Job Category"  [(selected)]="selectedJobCategory">
+                                <nb-option *ngFor="let job_category of lib_job_category; let i = index" [value]="job_category.jobCategoryId">
+                                    {{job_category.description}}
+                                </nb-option>
+                            </nb-select>
+                            <input formControlName="jobTitle" type="text" nbInput fullWidth placeholder="Job Title">
+                            <input formControlName="salary" type="number" nbInput fullWidth placeholder="Salary">
+                            <input formControlName="jobDescription" type="text" nbInput fullWidth placeholder="Job Description">
+                            <input formControlName="qualification" type="text" nbInput fullWidth placeholder="Qualification">
+                            <mat-checkbox class="example-margin" formControlName="isOpen"></mat-checkbox>
+                            <mat-checkbox class="example-margin" formControlName="isApproved"></mat-checkbox>
+                            <input nbInput  [matDatepicker]="dtclosingDate" placeholder="Closing Date"  formControlName="closingDate" style="color: black">
+                            <mat-datepicker-toggle matSuffix [for]="dtclosingDate"></mat-datepicker-toggle>
+                            <mat-datepicker touchUi #dtclosingDate></mat-datepicker>
+                        </div>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </form>
+</div>  

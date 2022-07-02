@@ -1,0 +1,113 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+    <form [formGroup]="HRStaffingForm" *ngIf="this.HRStaffingForm">
+        <nb-card>
+            <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+            <nb-card-header>
+                HR Staffing Plan
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            Existing nos. of personnel
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            For Job Order
+                            <input placeholder="..." type="number" nbInput fullWidth formControlName="existingNosPersonnelJO">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            For Plantilla
+                            <input placeholder="..." type="number" nbInput fullWidth formControlName="existingNosPersonnelPlantil">
+                        </div>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            Nos. of filled position
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            For Job Order
+                            <input placeholder="..." type="number" nbInput fullWidth formControlName="nosFilledPosJO">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            For Plantilla
+                            <input placeholder="..." type="number" nbInput fullWidth formControlName="nosFilledPosPlantil">
+                        </div>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            Nos. of unfilled position
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            For Job Order
+                            <input placeholder="..." type="number" nbInput fullWidth formControlName="nosUnfilledPosJO">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            For Plantilla
+                            <input placeholder="..." type="number" nbInput fullWidth formControlName="nosUnfilledPosPlantil">
+                        </div>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            Nos. of proposed position to change or modify
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            For Job Order
+                            <input placeholder="..." type="number" nbInput fullWidth formControlName="nosProposedPosToChangeJO">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            For Plantilla
+                            <input placeholder="..." type="number" nbInput fullWidth formControlName="nosProposedPosToChangePlantil">
+                        </div>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            Proposed nos. of personnel for next year
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            For Job Order
+                            <input placeholder="..." type="number" nbInput fullWidth formControlName="proposedNosPersonnelNextYrJO">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            For Plantilla
+                            <input placeholder="..." type="number" nbInput fullWidth formControlName="proposedNosPersonnelNextYrPlantil">
+                        </div>
+                    </div>
+                </div>  
+                <div class="row">
+                    <div class="col-sm-12">
+                        Note: Provide detailed supporting documentation for the approving authority and HR to review.
+                    </div>  
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </form>
+</div>

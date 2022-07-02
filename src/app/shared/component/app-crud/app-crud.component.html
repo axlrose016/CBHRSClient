@@ -1,0 +1,8 @@
+<nb-card>
+    <nb-card-header>Action</nb-card-header>
+    <nb-card-body class="action-rows">
+      <!-- <button nbButton status="primary"><nb-icon icon="edit-2-outline"></nb-icon>Edit</button> -->
+      <button nbButton (click)="onClick('Delete')" status="danger"><nb-icon icon="trash-outline"></nb-icon>Delete</button>
+      <button nbButton (click)="onClick('Save')" status="success"><nb-icon icon="save-outline"></nb-icon>Save</button>
+    </nb-card-body>
+  </nb-card>

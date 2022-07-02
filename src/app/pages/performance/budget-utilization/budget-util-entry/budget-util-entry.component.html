@@ -1,0 +1,98 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+    <form [formGroup]="BudgetForm" *ngIf="this.BudgetForm">
+    <nb-card>
+        <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+        <nb-card-header>
+            Budget Utilization for Quarter I
+        </nb-card-header>
+        <nb-card-body>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        Total Budget for Human Resource (Job Order)
+                        <input placeholder="Total Budget for Human Resource (Job Order)" type="number" nbInput fullWidth formControlName="totalBudgetJO">
+                        Total Budget for Human Resource (Plantilla)
+                        <input placeholder="Total Budget for Human Resource (Plantilla)" type="number" nbInput fullWidth formControlName="totalBudgetPlantil">
+                        Amount Spent for Q1 (Job Order)
+                        <input placeholder="Amount Spent for Q1 (Job Order)" type="number" nbInput fullWidth formControlName="amountSpentQ1JO">
+                        Amount Spent for Q1 (Plantilla)
+                        <input placeholder="Amount Spent for Q1 (Plantilla)" type="number" nbInput fullWidth formControlName="amountSpentQ1Plantil">
+                    </div>
+                </div>
+            </div>  
+        </nb-card-body>
+    </nb-card>
+    <nb-card>
+        <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+        <nb-card-header>
+            Budget Utilization for Quarter II
+        </nb-card-header>
+        <nb-card-body>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        Amount Spent for Q2 (Job Order)
+                        <input placeholder="Amount Spent for Q2 (Job Order)" type="number" nbInput fullWidth formControlName="amountSpentQ2JO">
+                        Amount Spent for Q2 (Plantilla)
+                        <input placeholder="Amount Spent for Q2 (Plantilla)" type="number" nbInput fullWidth formControlName="amountSpentQ2Plantil">
+                    </div>
+                </div>
+            </div>  
+        </nb-card-body>
+    </nb-card>
+    <nb-card>
+        <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+        <nb-card-header>
+            Budget Utilization for Quarter III
+        </nb-card-header>
+        <nb-card-body>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        Amount Spent for Q3 (Job Order)
+                        <input placeholder="Amount Spent for Q3 (Job Order)" type="number" nbInput fullWidth formControlName="amountSpentQ3JO">
+                        Amount Spent for Q3 (Plantilla)
+                        <input placeholder="Amount Spent for Q3 (Plantilla)" type="number" nbInput fullWidth formControlName="amountSpentQ3Plantil">
+                    </div>
+                </div>
+            </div>  
+        </nb-card-body>
+    </nb-card>
+    <nb-card>
+        <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+        <nb-card-header>
+            Budget Utilization for Quarter IV
+        </nb-card-header>
+        <nb-card-body>
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        Amount Spent for Q4 (Job Order)
+                        <input placeholder="Amount Spent for Q1 (Job Order)" type="number" nbInput fullWidth formControlName="amountSpentQ4JO">
+                        Amount Spent for Q4 (Plantilla)
+                        <input placeholder="Amount Spent for Q1 (Plantilla)" type="number" nbInput fullWidth formControlName="amountSpentQ4Plantil">
+                    </div>
+                </div>
+            </div>  
+        </nb-card-body>
+    </nb-card>
+    <nb-card>
+        <nb-card-body>
+            Is the funding set aside for human resources being fully utilized?
+            <mat-radio-group formControlName="is_funding_set_aside">
+                <mat-radio-button (change)="onRadioChange(true)" [value]="true">Yes</mat-radio-button>&nbsp;&nbsp;
+                <mat-radio-button (change)="onRadioChange(false)" [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+            <div *ngIf="!isShow1 && isShow1 != null">
+                Fill in the textbox with the last year/existing proposed HR budget
+                <input placeholder="Fill in the textbox with the last year/existing proposed HR budget" type="number" nbInput fullWidth formControlName="with_last_year_proposed_budget">
+            </div>
+            <div *ngIf="isShow1 && isShow1 != null">
+                Fill in the textbox with an additional proposed HR budget
+                <input placeholder="Fill in the textbox with an additional proposed HR budget" type="number" nbInput fullWidth formControlName="with_additional_proposed_budget">
+            </div>
+        </nb-card-body>
+    </nb-card>
+    </form>
+</div>

@@ -1,0 +1,66 @@
+<axl-app-list  (applistbtnclick)='eventHandler($event)'></axl-app-list>
+<div class="container">
+    <nb-card>
+        <nb-card-header>
+            Workplace Application Plan
+        </nb-card-header>
+        <mat-tab-group>
+            <mat-tab label="List">
+                <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+                    <nb-card>
+                        <nb-card-body>
+                            <mat-form-field appearance="standard" style="float:right; width: 100%;">
+                                <input matInput (keyup)="applyFilter($event)" placeholder="Search.." #input>
+                                <mat-icon matSuffix>search</mat-icon>
+                              </mat-form-field>
+
+                            <table mat-table #table class="mat-elevation-z8" [dataSource]="gridDataSource" matSort>
+                                <ng-container matColumnDef="wapId">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> WAP ID </th>
+                                    <td mat-cell *matCellDef="let erow" > {{erow.wapId}} </td>
+                                </ng-container>  
+
+                                <ng-container matColumnDef="personId">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Person ID </th>
+                                    <td mat-cell *matCellDef="let erow" > {{erow.personId}} </td>
+                                </ng-container> 
+
+                                <ng-container matColumnDef="firstName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> First Name </th>
+                                    <td mat-cell *matCellDef="let erow" > {{erow.firstName}} </td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="middleName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Middle Name </th>
+                                    <td mat-cell *matCellDef="let erow" >{{erow.middleName}}</td>
+                                </ng-container>
+                
+                                <ng-container matColumnDef="lastName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Last Name </th>
+                                    <td mat-cell *matCellDef="let erow">{{erow.lastName}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="title">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Title </th>
+                                    <td mat-cell *matCellDef="let erow">{{erow.title}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="provider">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 230px;"> Provider </th>
+                                    <td mat-cell *matCellDef="let erow">{{erow.provider}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="date_conduct">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header  style="width: 120px;"> Date Conduct </th>
+                                    <td mat-cell *matCellDef="let erow"> {{erow.date_conduct | date:'yyyy-MM-dd'}} </td>
+                                </ng-container>  
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onUserRowSelect(row.wapId)"></tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+                        </nb-card-body>
+                    </nb-card>
+            </mat-tab>
+        </mat-tab-group>
+    </nb-card>
+</div>

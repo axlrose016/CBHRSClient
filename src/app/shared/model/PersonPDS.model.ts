@@ -1,0 +1,217 @@
+import { Guid } from "guid-typescript";
+import { lib_brgy, lib_city, lib_province, lib_region } from "./library.model";
+
+export interface PersonPDSDetail{
+    personId?:Guid;
+    userId?:Guid;
+    firstName?:string;
+    middleName?:string;
+    lastName?:string;
+    extName?:string;
+    sex?:number;
+    birthDate?:Date;
+    placeOfBirth?:string;
+    maritalStatus?:number;
+    citizenship?:number;
+    bloodType?:string;
+    height?:string;
+    weight?:string;
+    gsis?:string;
+    philHealth?:string;
+    sss?:string;
+    pagIbig?:string;
+    tin?:string;
+    region_code?:string;
+    prov_code?:string;
+    city_code?:string;
+    brgy_code?:string;
+    purok?:string;
+    zipCode?:string;
+    telNo?:string;
+    mobileNo?:string;
+    email?:string;
+    deleted_by?:string;
+    deleted_date?:Date;
+    is_deleted?:boolean;
+    personTrainings?:PersonTrainings[];
+    personFamily?:PersonFamily[];
+    personEducations?:PersonEducation[];
+    personEligibilities?:PersonEligibility[];
+    personWorkExperiences?:PersonWorkExperience[];
+}
+export interface PersonTrainings{
+    personTrainingId?:Guid;
+    seminarTitle?:string;
+    dateFrom?:Date;
+    dateTo?:Date;
+    numHours?:number;
+    conductedBy?:string;
+    deleted_by?:string;
+    deleted_date?:Date;
+    is_deleted?:boolean;
+}
+export interface PersonFamily{
+    personFamilyId?:Guid;
+    firstName?:string;
+    middleName?:string;
+    lastName?:string;
+    extName?:string;
+    birthDate?:Date;
+    occupation?:string;
+    employer?:string;
+    businessAddress?:string;
+    telNo?:string;
+    relationship?:number;
+    deleted_by?:string;
+    deleted_date?:Date;
+    is_deleted?:boolean;
+}
+
+export interface PersonEducation{
+    personEducationId?:Guid;
+    nameOfSchool?:string;
+    schoolLevelId?:number;
+    yearGraduated?:string;
+    startDate?:Date;
+    endDate?:Date;
+    degreeCourse?:string;
+    highestAttaind?:string;
+    scholarshipAwardHonor?:string;
+    deleted_by?:string;
+    deleted_date?:Date;
+    is_deleted?:boolean;
+}
+export interface PersonEligibility{
+    personEligibilityId?:Guid;
+    eligibilityTitle?:string;
+    rating?:number;
+    dateOfExamination?:Date;
+    placeOfExamination?:string;
+    licenseNumber?:string;
+    licensceReleaseDate?:Date;
+    deleted_by?:string;
+    deleted_date?:Date;
+    is_deleted?:boolean;
+}
+export interface PersonWorkExperience{
+    personWorkExperienceId?:Guid;
+    positionTitle?:string;
+    companyName?:string;
+    startDate?:Date;
+    endDate?:Date;
+    monthlySalary?:number;
+    salaryGrade?:number;
+    salaryStep?:number;
+    appointmentStatusId?:number;
+    isGovt?:boolean;
+    deleted_by?:string;
+    deleted_date?:Date;
+    is_deleted?:boolean;
+}
+export interface PersonPDSList{
+    personId?:Guid;
+    firstName?:string;
+    middleName?:string;
+    lastName?:string;
+    extName?:string;
+    Sex?:number;
+    birthDate?:Date;
+    placeOfBirth?:string;
+    citil_status?:string;
+    citizenship?:string;
+    blood_type?:string;
+}
+
+export interface ClearanceList{
+    clearanceId?:Guid;
+    firstName?:string;
+    middleName?:string;
+    lastName?:string;
+    dateOfApplication?:Date;
+}
+
+export interface ClearanceDetail{
+    clearanceId?:Guid;
+    dateOfApplication?:Date;
+    isTransfer?:boolean;
+    isRetirement?:boolean;
+    isResignation?:boolean;
+    isLeave?:boolean;
+    isOther?:boolean;
+    specifyOther?:string;
+    effectivityInclusivePeriod?:string;
+    immediateSupervisor?:string;
+    divisionHead?:string;
+    withPendingAdminCase?:boolean;
+    withOnGoingInvestigation?:boolean;  
+    personId?:Guid;
+    deleted_by?:string;
+    deleted_date?:Date;
+    is_deleted?:boolean;
+}
+
+export interface PES11List{
+    pes11Id?:Guid;
+    firstName?:string;
+    middleName?:string;
+    lastName?:string;
+    grandTotal?:number;
+    avgPoint?:number;
+}
+
+export interface PES11Detail{
+    pes11Id?:Guid;
+    personId?:Guid;
+    deleted_by?:string;
+    deleted_date?:Date;
+    is_deleted?:boolean;
+    immediateSupervisor?:string;
+    immediateSupPosition?:number;
+    reviewPeriod?:string;
+    scr_diverseInfo?:number;
+    scr_researchesData?:number;
+    scr_usesIntuition?:number;
+    scr_identifiesData?:number;
+    scr_designsWorkflows?:number;
+    scr_volunteersReadily?:number;
+    scr_undertakeSelfDev?:number;
+    scr_seekIncResponsibilities?:number;
+    scr_takeIndActions?:number;
+    scr_takesAdvantage?:number;
+    scr_askForHelp?:number;
+    scr_creativity?:number;
+    scr_resourceful?:number;
+    scr_improveWork?:number;
+    scr_devInnovateIdeas?:number;
+    scr_competent?:number;
+    scr_exhibitAbility?:number;
+    scr_keepsAbreast?:number;
+    scr_minimalSupervision?:number;
+    scr_displaysUnderstanding?:number;
+    scr_usesResources?:number;
+    scr_plansWorkAct?:number;
+    scr_usesTimeEff?:number;
+    scr_plansForAddResources?:number;
+    scr_integratesChanges?:number;
+    scr_setsGoals?:number;
+    scr_worksOrganizedManner?:number;
+    scr_balancesTeam?:number;
+    scr_exhibitsObjective?:number;
+    scr_welcomesFeedback?:number;
+    scr_contribute?:number;
+    scr_putsSuccess?:number;
+    scr_expressesIdeas?:number;
+    scr_writesClearly?:number;
+    scr_exhibitsGoodListening?:number;
+    scr_keepsOtherAdequate?:number;
+    scr_usesAppCom?:number;
+    scr_presenDataEff?:number;
+    scr_courtesy?:number;
+    scr_humanRelations?:number;
+    scr_integrity?:number;
+    scr_stressTolerance?:number;
+    scr_complianceToOffice?:number;
+    scr_punctuality?:number;
+    grandTotal?:number;
+    avgPoint?:number;
+}

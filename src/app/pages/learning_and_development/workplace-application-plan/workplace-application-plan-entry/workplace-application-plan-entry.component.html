@@ -1,0 +1,223 @@
+<axl-app-crud (appcrudbtnclick)="eventHandler($event)"></axl-app-crud>
+<div class="container">
+<form [formGroup]="WAPForm" *ngIf="this.WAPForm">
+<nb-card>
+    <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+    <nb-card-header>
+        I. Course/Learning and Development (L&D) Intervention
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <input formControlName="title" type="text" nbInput fullWidth placeholder="Title">
+                    <input formControlName="provider" type="text" nbInput fullWidth placeholder="Provider">
+                    <textarea formControlName="learningOutcome" nbInput fullWidth placeholder="Textarea"></textarea>
+                  </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                  <input nbInput  [matDatepicker]="dtConduct" placeholder="Date Conduct"  formControlName="date_conduct" style="color: black">
+                  <mat-datepicker-toggle matSuffix [for]="dtConduct"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #dtConduct></mat-datepicker>
+                </div>
+            </div>
+        </div>  
+    </nb-card-body>
+</nb-card>
+<nb-card>
+    <nb-card-header>
+        II. Participant’s Information
+        <button (click)="openParticipantDialog();" nbButton status="success" style="float: right;"><nb-icon icon="search-outline"></nb-icon>Search Participant’s</button>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row" formGroupName="personDetails">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input formControlName="personId" type="text" nbInput fullWidth placeholder="Name">
+                    <input formControlName="firstName" type="text" nbInput fullWidth placeholder="Name">
+                    <input formControlName="middleName" type="text" nbInput fullWidth placeholder="Office and Division/Unit">
+                    <input formControlName="lastName" type="text" nbInput fullWidth placeholder="Salary Grade">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input nbInput  [matDatepicker]="dtBirthDate" placeholder="Birth Date"  formControlName="birthDate" style="color: black">
+                    <mat-datepicker-toggle matSuffix [for]="dtBirthDate"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #dtBirthDate></mat-datepicker>
+                    <input formControlName="placeOfBirth" type="text" nbInput fullWidth placeholder="Place Of Birth">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input formControlName="bloodType" type="text" nbInput fullWidth placeholder="Supervisor Name">
+                    <input formControlName="mobileNo" type="text" nbInput fullWidth placeholder="Supervisor Position">
+                </div>
+            </div>
+        </div>  
+    </nb-card-body>
+</nb-card>
+<nb-card>
+    <axl-app-loader *ngIf="showLoadingProgressBar$ | async"></axl-app-loader>
+    <nb-card-header>
+        III. Application Plan and Accomplishment
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                  <input nbInput  [matDatepicker]="dtStartDate" placeholder="Start Date"  formControlName="startDate" style="color: black">
+                  <mat-datepicker-toggle matSuffix [for]="dtStartDate"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #dtStartDate></mat-datepicker>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                  <input nbInput  [matDatepicker]="dtEndDate" placeholder="End Date"  formControlName="endDate" style="color: black">
+                  <mat-datepicker-toggle matSuffix [for]="dtEndDate"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #dtEndDate></mat-datepicker>
+                </div>
+            </div>
+        </div> 
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <textarea formControlName="objective" nbInput fullWidth placeholder="Objectives"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <textarea formControlName="output" nbInput fullWidth placeholder="Output"></textarea>
+            </div>
+          </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+<nb-card>
+    <nb-card>
+      <nb-card-body>
+        <div style="padding-bottom: 5px;">
+          <button (click)="createAPAFormGroup(null,true);"  mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="person-add-outline"></nb-icon>&nbsp;&nbsp;Add Plan and Accomplishment</button>
+        </div>
+        <table>
+          <tr>
+            <th>Action</th>
+            <th>Milestone %</th>
+            <th>What needs to be done?</th>
+            <th>Target Date</th>
+            <th>Means of verification</th>
+            <th>Date Assessed</th>
+            <th>Progress%</th>
+            <th>What was done?</th>
+            <th>What was not done?</th>
+            <th>Reason for non-accomplish</th>
+            <th>Catch-up Activities</th>
+          </tr>
+          <tr *ngFor="let apa of apaFormArray.controls;let i = index;let last = last;" [formGroup]="apa">
+            <td>
+              <button (click)="editTableRecord('apa',i);" *ngIf="selectedAPA != i" mat-raised-button style="background-color:#3366ff; color:white;"><nb-icon icon="edit-2-outline"></nb-icon>Edit&nbsp;&nbsp;</button>
+              <button (click)="saveTableRecord('apa',i);" *ngIf="selectedAPA == i" mat-raised-button style="background-color: #00d68f; color:white;"><nb-icon icon="save-outline"></nb-icon>Save</button>
+            </td>
+            <td>
+              <mat-form-field style="width: 90px;" *ngIf="selectedAPA == i">
+                <input type="number" formControlName="milestone" matInput/>
+              </mat-form-field>
+              <span *ngIf="selectedAPA != i">{{apa.value.milestone}}</span>
+            </td>
+            <td>
+              <mat-form-field style="height: 53px;" *ngIf="selectedAPA == i">
+                <textarea matInput
+                          formControlName="whatNeedsToBeDone"
+                          cdkTextareaAutosize
+                          #autosize="cdkTextareaAutosize"
+                          cdkAutosizeMinRows="1"
+                          cdkAutosizeMaxRows="5"></textarea>
+              </mat-form-field>
+              <span *ngIf="selectedAPA != i">{{apa.value.whatNeedsToBeDone}}</span>
+            </td>
+            <td>
+              <mat-form-field style="width: 100px;" *ngIf="selectedAPA == i">
+                <input matInput [matDatepicker]="dttargetDate" formControlName="targetDate" style="color: black">
+                <mat-datepicker-toggle matSuffix [for]="dttargetDate"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #dttargetDate></mat-datepicker>
+              </mat-form-field>
+              <span *ngIf="selectedAPA != i">{{apa.value.targetDate | date:'MM/dd/yyyy'}}</span>
+            </td>
+            <td>
+              <mat-form-field style="height: 53px;" *ngIf="selectedAPA == i">
+                <textarea matInput
+                          formControlName="meansOfVerification"
+                          cdkTextareaAutosize
+                          #autosize="cdkTextareaAutosize"
+                          cdkAutosizeMinRows="1"
+                          cdkAutosizeMaxRows="5"></textarea>
+              </mat-form-field>
+              <span *ngIf="selectedAPA != i">{{apa.value.meansOfVerification}}</span>
+            </td>
+            <td>
+              <mat-form-field style="width: 100px;" *ngIf="selectedAPA == i">
+                <input matInput [matDatepicker]="dtAddressed" formControlName="dateAddressed" style="color: black">
+                <mat-datepicker-toggle matSuffix [for]="dtAddressed"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #dtAddressed></mat-datepicker>
+              </mat-form-field>
+              <span *ngIf="selectedAPA != i">{{apa.value.dateAddressed | date:'MM/dd/yyyy'}}</span>
+            </td>
+            <td>
+              <mat-form-field style="width: 90px;" *ngIf="selectedAPA == i">
+                <input type="number" formControlName="progress" matInput/>
+              </mat-form-field>
+              <span *ngIf="selectedAPA != i">{{apa.value.progress}}</span>
+            </td>
+            <td>
+              <mat-form-field style="height: 53px;" *ngIf="selectedAPA == i">
+                <textarea matInput
+                          formControlName="whatWasDone"
+                          cdkTextareaAutosize
+                          #autosize="cdkTextareaAutosize"
+                          cdkAutosizeMinRows="1"
+                          cdkAutosizeMaxRows="5"></textarea>
+              </mat-form-field>
+              <span *ngIf="selectedAPA != i">{{apa.value.whatWasDone}}</span>
+            </td>
+            <td>
+              <mat-form-field style="height: 53px;" *ngIf="selectedAPA == i">
+                <textarea matInput
+                          formControlName="whatWasNotDone"
+                          cdkTextareaAutosize
+                          #autosize="cdkTextareaAutosize"
+                          cdkAutosizeMinRows="1"
+                          cdkAutosizeMaxRows="5"></textarea>
+              </mat-form-field>
+              <span *ngIf="selectedAPA != i">{{apa.value.whatWasNotDone}}</span>
+            </td>
+            <td>
+              <mat-form-field style="height: 53px;" *ngIf="selectedAPA == i">
+                <textarea matInput
+                          formControlName="ReasonForNonAccomplish"
+                          cdkTextareaAutosize
+                          #autosize="cdkTextareaAutosize"
+                          cdkAutosizeMinRows="1"
+                          cdkAutosizeMaxRows="5"></textarea>
+              </mat-form-field>
+              <span *ngIf="selectedAPA != i">{{apa.value.ReasonForNonAccomplish}}</span>
+            </td>
+            <td>
+              <mat-form-field style="height: 53px;" *ngIf="selectedAPA == i">
+                <textarea matInput
+                          formControlName="catchUpActivities"
+                          cdkTextareaAutosize
+                          #autosize="cdkTextareaAutosize"
+                          cdkAutosizeMinRows="1"
+                          cdkAutosizeMaxRows="5"></textarea>
+              </mat-form-field>
+              <span *ngIf="selectedAPA != i">{{apa.value.catchUpActivities}}</span>
+            </td>
+          </tr>
+        </table>
+      </nb-card-body>
+    </nb-card>
+  </nb-card>
+</form>
+</div>
